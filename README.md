@@ -16,8 +16,19 @@
 
 <br><br>
 <h3>内置函数库</h3>
-<table>
-  <tbody></tbody>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td>KJ.use</td>
+      <td>
+        加载js和css插件，加载完成后回调
+        KJ.use([
+          ["插件地址","js"],
+          ["插件地址","css"]
+        ]);
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 
