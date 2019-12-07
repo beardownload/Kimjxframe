@@ -1,4 +1,4 @@
-<div style="font-size: 20px">返璞归真，简单优雅</div>
+<h2>返璞归真，简单优雅</h2>
 
 无需编译，无插件依赖，直接开撸。<br>
 
@@ -17,17 +17,19 @@
 
 
 /* 使用 */
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-<title></title>
-</head>
-<body>
-  <script src="../Kimjxframe.js"></script>
-  <script>
-    KJ.init({root:""});
-  </script>
-</body>
-</html>
+<pre>
+  <!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+  <title></title>
+  </head>
+  <body>
+    <script src="../Kimjxframe.js"></script>
+    <script>
+      KJ.init({root:""});
+    </script>
+  </body>
+  </html>
+</pre>
