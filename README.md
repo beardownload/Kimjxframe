@@ -103,7 +103,37 @@
 
 
 <br><br>
-<h3>配合vue 使用</h3>
+<h3>配合layui模版语言使用 使用</h3>
 <pre>
-  
+  <script type="text/html" id="tpl">
+    模版{{ d.txt }}
+  </script>
+
+  <script>
+    var App = {};
+
+    App.init = function(){
+      var _this = this;
+
+      var init = function(){
+        layui.use(["laytpl"],function(){
+          _this.F_init();
+        });
+      }
+
+      //初始化 krender 请查看封装了 laytpl的 Ktool.js 项目
+      _this.F_init = function(){
+        var render = Ktool.krender("#render");
+
+        render.t = $("#tpl").html();
+        render.d = {txt:"初始内容"};
+      }
+
+
+      init();
+    }
+
+
+    App.init();
+  </script>
 </pre>
