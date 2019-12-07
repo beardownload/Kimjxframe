@@ -19,13 +19,39 @@
 <table width="100%">
   <tbody>
     <tr>
-      <td>KJ.use</td>
+      <td>KJ.Fnuse</td>
       <td>
-        加载js和css插件，加载完成后回调
-        KJ.use([
-          ["插件地址","js"],
-          ["插件地址","css"]
+        加载js和css插件，加载完成后回调，可以重复使用，如果已经被加载，则不会重复加载。
+        KJ.Fnuse([
+          ["js文件地址","js"],
+          ["css文件地址","css"]
         ]);
+      </td>
+    </tr>
+    <tr>
+      <td>KJ.FngetGet</td>
+      <td>
+        解析url 参数为对象
+        KJ.FngetGet("text.html?a=1&b=2");
+        返回对象 {a:1,b:2}
+      </td>
+    </tr>
+    <tr>
+      <td>KJ.Fnpageloader</td>
+      <td>
+        加载页面，配置页面目录下加载对应的html或者js文件
+        var tpl = "test/index";
+        KJ.Fnpageloader(tpl,function(){
+          //获取加载的页面内容
+          KJ.getApp(tpl);
+        });
+      </td>
+    </tr>
+    <tr>
+      <td>KJ.getApp</td>
+      <td>
+        获取加载的页面内容，框架会自动缓存页面内容，如果已经加载则直接从内存中返回，后缀名不填写，统一使用运行模式js/html。
+        KJ.getApp("test/index");
       </td>
     </tr>
   </tbody>
