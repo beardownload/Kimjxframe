@@ -18,18 +18,33 @@
 
 /* 使用 */
 <pre>
-  <!DOCTYPE html>
-  <html>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
-  <title></title>
-  </head>
-  <body>
-    <script src="../Kimjxframe.js"></script>
-    <script>
-      KJ.init({root:""});
-    </script>
-  </body>
-  </html>
+  <script src="../Kimjxframe.js"></script>
+  <script>
+    KJ.init({root:""});
+
+    /*配置参数
+      {
+        //根目录 js文件存放目录 走js可跨域存放页面 html必须存放一起或者后端做跨域处理
+        root:"",
+
+        //初始化文件 app.js请具体到各个demo内查看 整个项目复制即可 开撸页面
+        start:"app.js",
+
+        //页面js存放地
+        pageroot:"pages/",
+
+        //默认初始框架页 hash值
+        defaultframe:"main/main",
+
+        //默认主页
+        defaultpage:"main/index",
+
+        //顶部渲染页面dom点
+        appdom:document.createElement("div"),
+
+        //默认页面运行模式 js 和 html
+        runmode:"js",
+      }
+    */
+  </script>
 </pre>

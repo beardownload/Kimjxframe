@@ -1,0 +1,64 @@
+<a href="#test/index.html?a=1&b=2">链接到新页面</a>
+
+<a onclick="App.F_init(this)">点击事件原生绑定</a>
+
+<div style="height: .1rem"></div>
+
+<div id="chart" style="width: 5rem; height: 6rem;"></div>
+
+<script>
+  //个人喜好 页面开发最好所以东西挂载一个对象上
+  //方便内存释放 方便其他处调用该对象的内容
+  var App = {};
+
+  App.init = function(){
+    var _this = this;
+
+    //定义一个函数
+    _this.F_init = function(a){
+      alert(a.innerHTML);
+    }
+
+
+    //加载插件 也可使用 KJ.use app.js 这边做了指针映射
+    Kim.use([
+      ["https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js","js"]
+    ],function(){
+      _this.F_loadChart();
+    });
+
+
+    /* 加载图表 */
+    _this.F_loadChart = function(){
+      var chart = echarts.init($("#chart")[0]);
+
+      //图表窗口大小变化 触发重绘图表大小
+      $(window).on("resize",chart.resize);
+
+      //页面被销毁时触发，处理回收大容量内存插件如果小 可忽略这些操作，在app.js中定义 可自己定义更多事件
+      _this.pageend = function(){
+        $(window).off("resize",chart.resize);
+        chart.dispose();
+      }
+
+
+      option = {
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line'
+        }]
+      };
+
+      cahrt.setOption(option);
+    }
+  }
+
+  App.init();
+</script>

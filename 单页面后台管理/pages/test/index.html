@@ -1,0 +1,18 @@
+<a href="#">返回默认页</a><br>
+
+<div id="pagerender"></div>
+
+<script>
+  var App = {};
+
+  App.init = function(){
+    var _this = this;
+
+    //页面传参 都将被解析到 GET全局变量内
+    var get   = GET;
+
+    $("#pagerender").html( JSON.stringify(get) );
+  }
+
+  App.init();
+</script>
