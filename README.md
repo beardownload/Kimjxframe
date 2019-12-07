@@ -9,19 +9,19 @@
 
 <br><br>
 <h3>可实现框架功能</h3><br>
-1.前后端分离，接口域名不分离。
-2.手机端单页面，多窗口功能，封装了hsah处理，页面参数传递，页面通信。
-3.单页面后台管理系统开发。
+1.前后端分离，接口域名不分离。<br>
+2.手机端单页面，多窗口功能，封装了hsah处理，页面参数传递，页面通信。<br>
+3.单页面后台管理系统开发。<br>
 
 
-<br><br>
+<br>
 <h3>内置函数库</h3>
 <table width="100%">
   <tbody>
     <tr>
       <td>KJ.Fnuse</td>
       <td>
-        加载js和css插件，加载完成后回调，可以重复使用，如果已经被加载，则不会重复加载。
+        加载js和css插件，加载完成后回调，可以重复使用，如果已经被加载，则不会重复加载。<br>
         KJ.Fnuse([
           ["js文件地址","js"],
           ["css文件地址","css"]
@@ -39,7 +39,7 @@
     <tr>
       <td>KJ.Fnpageloader</td>
       <td>
-        加载页面，配置页面目录下加载对应的html或者js文件
+        加载页面，配置页面目录下加载对应的html或者js文件<br>
         var tpl = "test/index";
         KJ.Fnpageloader(tpl,function(){
           //获取加载的页面内容
@@ -58,7 +58,7 @@
 </table>
 
 
-<br><br>
+<br>
 /* 简单使用 推荐使用jq或者zepto食用 */
 <pre>
   <script src="../Kimjxframe.js"></script>
@@ -95,7 +95,7 @@
 
 
 
-<br><br>
+<br>
 <h3>配合vue 使用</h3>
 <pre>
   <div id="app">
@@ -137,7 +137,7 @@
 
 
 
-<br><br>
+<br>
 <h3>配合layui模版语言使用 使用</h3>
 <pre>
   <script type="text/html" id="tpl">
