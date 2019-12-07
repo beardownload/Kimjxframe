@@ -1,10 +1,16 @@
 <a href="#test/index.html?a=1&b=2">链接到新页面</a>
 
+<div style="height: .1rem"></div>
+
 <a onclick="App.F_init(this)">点击事件原生绑定</a>
 
 <div style="height: .1rem"></div>
 
-<div id="chart" style="width: 5rem; height: 6rem;"></div>
+<a href="#vue/index.html?a=1&b=2">vue使用</a>
+
+<div style="height: .1rem"></div>
+
+<div id="chart" style="width: 8rem; height: 5rem;"></div>
 
 <script>
   //个人喜好 页面开发最好所以东西挂载一个对象上
@@ -20,12 +26,15 @@
     }
 
 
-    //加载插件 也可使用 KJ.use app.js 这边做了指针映射
-    Kim.use([
-      ["https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js","js"]
-    ],function(){
-      _this.F_loadChart();
-    });
+    //初始化 局部函数 等待对象加载完全后运行
+    var init = function(){
+      //加载插件 也可使用 KJ.use app.js 这边做了指针映射
+      Kim.use([
+        ["https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js","js"]
+      ],function(){
+        _this.F_loadChart();
+      });
+    }
 
 
     /* 加载图表 */
@@ -41,7 +50,6 @@
         chart.dispose();
       }
 
-
       option = {
         xAxis: {
           type: 'category',
@@ -56,8 +64,11 @@
         }]
       };
 
-      cahrt.setOption(option);
+      chart.setOption(option);
     }
+
+
+    init();
   }
 
   App.init();

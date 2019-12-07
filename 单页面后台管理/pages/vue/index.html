@@ -1,0 +1,37 @@
+<div id="app">
+  {{ message }}
+
+  <a href="#">返回默认页<a>
+</div>
+
+<script>
+  var App = {};
+
+  App.init = function(){
+    var _this = this;
+
+    var init = function(){
+      Kim.use([
+        ["https://cdn.bootcss.com/vue/2.6.10/vue.min.js","js"]
+      ],function(){
+        _this.F_init();
+      });
+    }
+
+    //初始化 vue 对象加载数据进行页面渲染
+    _this.F_init = function(){
+      _this.vue = new Vue({
+        el: '#app',
+        data: {
+          message: 'Hello Vue!'
+        }
+      });
+    }
+
+
+    init();
+  }
+
+
+  App.init();
+</script>
