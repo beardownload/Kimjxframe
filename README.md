@@ -2,14 +2,14 @@
 
 无需编译，无插件依赖，直接开撸。<br>
 
-框架大小 8Kb gzip后 emmmm反正很小，大家可以看源码<br>
+框架大小 8Kb emmmm反正很小，大家可以看源码<br>
 
 初始页面基本 只需加载框架 8kb<br>
 
 
 <br><br>
 <h3>可实现框架功能</h3><br>
-1.前后端分离，接口域名不分离。<br>
+1.前后端文件分离，接口域名不分离，入口文件和后端放一起即可。<br>
 2.手机端单页面，多窗口功能，封装了hsah处理，页面参数传递，页面通信。<br>
 3.单页面后台管理系统开发。<br>
 
@@ -52,6 +52,37 @@
       <td>
         获取加载的页面内容，框架会自动缓存页面内容，如果已经加载则直接从内存中返回，后缀名不填写，统一使用运行模式js/html。
         KJ.getApp("test/index");
+      </td>
+    </tr>
+    <tr>
+      <td>KJ.Fnregistevent</td>
+      <td>
+        自定义事件，已内置了hash触发事件，只要注册即可。
+        KJ.Fnregistevent("hashchange",f); name:事件名称或者标记。f:触发事件的函数。注册成功返回事件ID。
+      </td>
+    </tr>
+    <tr>
+      <td>KJ.Fnunregistevent</td>
+      <td>
+        自定义事件。
+        KJ.Fnunregistevent(name,id); name:事件名称或者标记。id:注册事件时返回的ID。
+      </td>
+    </tr>
+    <tr>
+      <td>KJ.Fneventdeal</td>
+      <td>
+        触发自定义事件。
+        KJ.Fneventdeal(name,data); name:事件名称或者标记。data:事件触发，传递的参数。
+      </td>
+    </tr>
+    <tr>
+      <td>KJ.Fnregistpage</td>
+      <td>
+        注册页面html。
+        KJ.Fnregistpage(html,callback,name);<br>
+        html:页面html。<br>
+        callback:加载注册完成回调。<br>
+        name:页面名称，hash模式自动匹配当前hash注册，注册模式取传入的name。
       </td>
     </tr>
   </tbody>
