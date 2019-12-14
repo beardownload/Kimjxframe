@@ -309,7 +309,7 @@
     Fnregistpage:function(html,callback,name){
       var _this = KJ;
 
-      var u = !name ? name : _this.HASH.page;
+      var u = !name ? _this.HASH.page : name;
 
       var pnf = u.split(".");
 
