@@ -306,13 +306,18 @@
     },
 
     //注册页面对象 没有name则会以hash作为name创建
-    Fnregistpage:function(obj,callback,name){
+    Fnregistpage:function(html,callback,name){
       var _this = KJ;
 
-      if(!name){
-        name = _this.HASH.page;
+      var u = !name ? name : _this.HASH.page;
+
+      var pnf = u.split(".");
+
+      if(pnf.length <= 1){
+        u = u + "." + KJ.CONFIG.runmode;
       }
-      _this.APP[name] = obj;
+
+      _this.APP[u] = html;
 
       if(callback){callback();}
     },
