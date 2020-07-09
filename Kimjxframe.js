@@ -24,6 +24,15 @@
 
       //默认页面运行模式 js 和 html
       runmode:"js",
+
+      //模版加载模式 默认 js和html || api 接口模式可做跨域处理
+      Templatemode:"default",
+
+      //模版接口模式 地址
+      TemplatemodeAPI:"",
+
+      //js 缓存版本控制 修改该属性即可控制版本缓存
+      cachevesion:"",
     },
 
     //事件
@@ -141,7 +150,15 @@
     FngetJsTemplate:function(u,callback){
       var _this = KJ;
 
-      var url   = _this.CONFIG.root + _this.CONFIG.pageroot + u;
+      var url
+
+      //页面接口模式 OR 默认模式
+      if(_this.CONFIG.Templatemode == "api"){
+        url = _this.CONFIG.root + _this.CONFIG.pageroot + _this.CONFIG.TemplatemodeAPI + "?page=" + u + "&runmode=js";
+      }else{
+        url = _this.CONFIG.root + _this.CONFIG.pageroot + u;
+      }
+         
 
       KJ.Fnloadjs(url,function(){
         if(callback){callback()};
@@ -150,7 +167,7 @@
 
 
     //加载html页面
-    FngetTemplate:function(u,callback){
+    FngetTemplate:function(u,callback,fail){
       var _this = KJ;
 
       if(_this.APP[u]){
@@ -158,7 +175,14 @@
         return;
       }
 
-      var url = _this.CONFIG.root + _this.CONFIG.pageroot + u;
+      var url;
+
+      //页面接口模式 OR 默认模式
+      if(_this.CONFIG.Templatemode == "api"){
+        url = _this.CONFIG.root + _this.CONFIG.pageroot + _this.CONFIG.TemplatemodeAPI + "?page=" + u + "&runmode=html";
+      }else{
+        url = _this.CONFIG.root + _this.CONFIG.pageroot + u;
+      }
 
       var xhr = new XMLHttpRequest();
       xhr.open('get', url, true);
@@ -172,12 +196,14 @@
           },u);
 
         }else{
-            
-          //页面获取失败
-          _this.Fnregistpage('页面加载失败, errCode:' + xhr.status,function(){
-            if(callback){callback()};
-          },u);
-
+          if(fail){
+            fail();
+          }else{
+            //页面获取失败
+            _this.Fnregistpage('页面加载失败, errCode:' + xhr.status,function(){
+              if(callback){callback()};
+            },u);
+          }
         }
       }
 
@@ -208,9 +234,7 @@
         }else{
           if(list[count][1] == "css"){
             _this.Fnloadcss(list[count][0],function(){ count++; deal(); });
-          }
-
-          if(list[count][1] == "js"){
+          }else if(list[count][1] == "js"){
             _this.Fnloadjs(list[count][0],function(){ count++; deal(); });
           }
         }
@@ -220,7 +244,7 @@
     },
 
     //加载js
-    Fnloadjs:function(u,callback){
+    Fnloadjs:function(u,callback,fail){
       var _this = KJ;
 
       if(!_this.LOADERCALLBACK[u]){
@@ -255,10 +279,19 @@
       }
 
       script.onerror = function(){
-        console.error([u,"加载失败！"]);
+        if(fail){
+          fail();
+        }else{
+          console.error([u,"加载失败！"]);
+        }
       }
 
-      script.src = u;
+      if(u.split("?").length > 1){
+        script.src = u + (KJ.cachevesion ? "&v=" + KJ.cachevesion : "");
+      }else{
+        script.src = u + (KJ.cachevesion ? "?v=" + KJ.cachevesion : "");
+      }
+      
 
       document.body.appendChild(script);
     },
@@ -295,7 +328,7 @@
         console.error([u,"加载失败！"]);
       }
 
-      link.href = u;
+      link.href = u + (KJ.cachevesion ? "?v=" + KJ.cachevesion : "");
 
       document.head.appendChild(link);
     },
@@ -353,15 +386,22 @@
     Fnhashchange:function(e){
       var _this = KJ;
 
-      _this.HASH.rawURL = e ? e.newURL : location.href;
-      _this.HASH.oldURL = e ? e.oldURL : location.href;
+      //修复低版本浏览器事件数据不完整问题
+      if(e && e.newURL){
+        _this.HASH.rawURL = e ? e.newURL : location.href;
+        _this.HASH.oldURL = e ? e.oldURL : location.href;
+      }else{
+        _this.HASH.oldURL = _this.HASH.rawURL ? _this.HASH.rawURL : "";
+        _this.HASH.rawURL = location.href;
+      }
+      
 
-      var pageparam = _this.HASH.rawURL.split("?");
+      var pageparam = _this.HASH.rawURL.split("#");
 
-      var page = pageparam[0].split("#")[1];
+      var page = pageparam.length > 1 ? pageparam[1].split("?")[0] : false;
 
       _this.HASH.page = page || _this.CONFIG.defaultpage;
-      _this.HASH.GET  = _this.FngetGet(_this.HASH.rawURL);
+      _this.HASH.GET  = _this.FngetGet(pageparam.length > 1 ? pageparam[1] : "");
 
       _this.Fneventdeal("hashchange",{e:e,hash:_this.HASH});
     },

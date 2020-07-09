@@ -14,7 +14,34 @@
 3.单页面后台管理系统开发。<br>
 
 
-<br>
+<br><br>
+<h3>开发web服务使用</h3><br>
+
+服务目录为demo的 Kimjxframe.js 框架文件 目录
+项目目录为 单页面后台管理 目录 中文名可以自行修改为其他名称
+
+<br><br>
+linux 下 可以使用 phython 起web服务
+<pre>
+  python3 -m http.server
+</pre>
+
+
+<br><br>
+windows下推荐 PHPupupw 一键包 启动ngix web服务<br>
+https://www.upupw.net/
+
+
+<br><br>
+<h3>文件目录说明</h3><br>
+单页面后台管理项目目录<br>
+ -index.html 入口文件<br>
+ -pages 页面目录<br>
+ -app.js 项目业务 框架实现 加载js 样式 页面路由等 我们会提供多种业务框架选择 也可自己实现<br>
+Kimjxframe.js 框架<br>
+
+
+<br><br>
 <h3>内置函数库</h3>
 <table width="100%">
   <tbody>
