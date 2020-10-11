@@ -63,7 +63,7 @@
 
       //创建 组件css
       Kim.VUE_COMPONENT_CSSDOM.style["display"] = "none";
-      document.body.append(Kim.VUE_COMPONENT_CSSDOM);
+      document.body.appendChild(Kim.VUE_COMPONENT_CSSDOM);
 
       _this.VUE_loadComponent(framepage,function(){
         Kim.VUE_EMPTYPAGE = "K-VUE-EMPTYPAGE";
