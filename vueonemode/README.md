@@ -121,7 +121,8 @@ Kimjxframe.js 框架<br>
   </script>
 
 
-  组件js代码 完全和vue 一致 详细查看官方文档
+  组件js代码 完全和vue 一致 详细查看官方文档<br>
+  __COMPONENT__ 和 __TEMPLATE__ 两个参数为固定值，将被处理成目录映射参数和模版文件
   <script>
     Vue.component(__COMPONENT__,{
       props:["G"],
