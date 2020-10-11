@@ -40,19 +40,19 @@ https://www.upupw.net/
 <br><br>
 <h3>文件目录说明</h3><br>
 单页面后台管理项目目录<br>
- ·pages 页面目录<br>
+ *pages 页面目录<br>
 
- ··main 页面框架主入口文件夹，可通过修改配置更换<br>
- ··main.html 入口页面框架，路由切换组件body在这里面，菜单组件引入头部组件引入<br>
- ···index.html 默认首页<br>
- ···menu 菜单组件文件夹<br>
- ····list.html 菜单组件<br>
- ···header 头部组件文件夹<br>
- ····index.html 头部组件<br>
+ **main 页面框架主入口文件夹，可通过修改配置更换<br>
+ **main.html 入口页面框架，路由切换组件body在这里面，菜单组件引入头部组件引入<br>
+ ***index.html 默认首页<br>
+ ***menu 菜单组件文件夹<br>
+ ****list.html 菜单组件<br>
+ ***header 头部组件文件夹<br>
+ ****index.html 头部组件<br>
 
- ··test 测试页面文件夹<br>
- ···index 测试页面文件夹<br>
- ····index.html 测试组件页面，将会被加载到body中<br>
+ **test 测试页面文件夹<br>
+ ***index 测试页面文件夹<br>
+ ****index.html 测试组件页面，将会被加载到body中<br>
 index.html 入口文件<br>
 app.js 项目业务 框架实现 加载js 样式 页面路由等 我们会提供多种业务框架选择 也可自己实现<br>
 Kimjxframe.js 框架<br>
