@@ -2,7 +2,7 @@
 
 无需编译，直接开撸。<br><br>
 
-如需要查看 Kimframe 最新东西可 关注<br>
+如需要查看 Kimjxframe 最新的技术东西可 关注<br>
 <a href="http://ghs.mybear.ga/" target="_blank">熊熊下载</a>
 
 <h3>
