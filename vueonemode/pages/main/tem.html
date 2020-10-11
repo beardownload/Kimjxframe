@@ -1,0 +1,179 @@
+<script>
+  /*var RootApp = {};
+
+
+  RootApp.init = function(){
+    _this = this;
+
+    //全局控制用户信息
+    _this.UserInfo = {
+      accountid:1,
+      nickname:"昵称",
+      token:"",
+      account:"",
+    };
+
+
+    //全局继承 Kim框架层 配置参数
+    _this.KimConfig = {
+      RootPath:Kim.RootPath,
+    }
+
+
+    var init = function(){
+      _this.F_loadMenu();
+    }
+
+
+    /* 主框架页加载完成 回调 */
+    _this.F_mainFrameCallback = function(){
+      KJ.Fnhashchange();
+    }
+
+
+    /* 加载菜单 */
+    _this.F_loadMenu = function(){
+      Kim.VUE_loader({
+        el:$("#menu")[0],
+
+        data:{
+          G:_this.F_getVueDefaultData(),
+
+          //菜单数据
+          menus:[
+            {id:1,name:"菜单1",icon:"fas fa-cash-register",url:"#test/index/index",child:[]},
+
+            {id:200,name:"菜单2",icon:"fas fa-cash-register",url:"#test/index/index",child:[
+              {id:201,name:"菜单1",url:"#test/index/index"},
+            ]},
+
+            {id:300,name:"菜单3",icon:"fas fa-cash-register",url:"#test/index/index",child:[
+              {id:301,name:"菜单301",url:"#test/index/index"},
+              {id:302,name:"菜单302",url:"#test/index/index"},
+              {id:303,name:"菜单303",url:"#test/index/index"},
+            ]},
+          ],
+        },
+
+        methods:{
+
+        },
+
+        mounted:function(){
+          _this.meneLoadedStatus = false;
+
+          var $MenusContainer = $("#menu");
+
+          //初始化菜单事件
+          _this.F_activeMenu = function(i,m){
+            if(!_this.meneLoadedStatus){
+              setTimeout
+              $MenusContainer.find(".j-leftmune-N[data-id='"+ i +"']").addClass("active").find(".j-leftmune-menulist-sub").show().find("a[data-id='"+ m +"']").addClass("active");
+
+              _this.meneLoadedStatus = true;
+
+              $MenusContainer.find(".j-leftmune-menulist-a").on("click",function(){
+                var aim = $(this).parent();
+                
+                if(aim.is(".active")){
+                  aim.find(".j-leftmune-menulist-sub").slideUp();
+                  aim.removeClass("active");
+                }else{
+                  aim.find(".j-leftmune-menulist-sub").slideDown();
+                  aim.addClass("active");
+                }
+              });
+
+              $MenusContainer.find(".j-leftmune-menulist-sub a").on("click",function(){
+                $MenusContainer.find(".j-leftmune-menulist-sub a").removeClass("active");
+                $MenusContainer.find(".j-leftmune-menulist-a-nosub").parent().removeClass("active");
+                $(this).addClass("active");
+              });
+
+              $MenusContainer.find(".j-leftmune-menulist-a-nosub").on("click",function(){
+                $MenusContainer.find(".j-leftmune-menulist-a-nosub").parent().removeClass("active");
+                $MenusContainer.find(".j-leftmune-menulist-sub a").removeClass("active");
+                $(this).parent().addClass("active");
+              });
+            }else{
+              $MenusContainer.find(".j-leftmune-menulist-sub a").removeClass("active");
+              $MenusContainer.find(".j-leftmune-menulist-a-nosub").parent().removeClass("active");
+              
+              $MenusContainer.find(".j-leftmune-N[data-id='"+ i +"']").addClass("active").find(".j-leftmune-menulist-sub").show().find("a[data-id='"+ m +"']").addClass("active");
+            }
+          }
+
+          _this.F_mainFrameCallback();
+        }
+      },function(_vue){
+        _this.vue_menu = _vue;
+      });
+    }
+
+
+    /* 初始化头部 */
+    _this.F_loadHeadNav = function(){
+      Kim.VUE_loader({
+        el:$("#menu")[0],
+
+        data:{
+          G:_this.F_getVueDefaultData(),
+
+          //菜单数据
+          menus:[
+            {id:1,name:"菜单1",icon:"fas fa-cash-register",url:"#test/index/index",child:[]},
+
+            {id:200,name:"菜单2",icon:"fas fa-cash-register",url:"#test/index/index",child:[
+              {id:201,name:"菜单1",url:"#test/index/index"},
+            ]},
+
+            {id:300,name:"菜单3",icon:"fas fa-cash-register",url:"#test/index/index",child:[
+              {id:301,name:"菜单301",url:"#test/index/index"},
+              {id:302,name:"菜单302",url:"#test/index/index"},
+              {id:303,name:"菜单303",url:"#test/index/index"},
+            ]},
+          ],
+        },
+
+        methods:{
+
+        },
+
+        mounted:function(){
+          
+        }
+      },function(_vue){
+        _this.vue_Header = _vue;
+      });
+    }
+
+
+    /* 导航数据修改 */
+    _this.F_nav = function(list){
+
+    }
+
+
+    /* 获取vue 插件统一数据管理 */
+    _this.F_getVueDefaultData = function(){
+      return {
+        webconfig:Kim.WEBCONFIG,
+
+        //语言包文件
+        lang:{},
+
+        userinfo:_this.UserInfo,
+
+        KimConfig:_this.KimConfig,
+
+        G:{},
+      };
+    }
+    
+
+    init();
+  }
+
+
+  RootApp.init();
+</script>

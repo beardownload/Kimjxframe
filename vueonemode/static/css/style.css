@@ -1,0 +1,77 @@
+@media only screen and (max-width:399px){html{font-size:95px}}
+@media only screen and (min-width:400px){html{font-size:100px}}
+@media only screen and (min-width:750px){html{font-size:105px}}
+@media only screen and (min-width:1200px){html{font-size:110px}}
+
+::-webkit-scrollbar {width: 0; height: 0}
+*,:after,:before{-webkit-tap-highlight-color:transparent}
+body,html{height:100%; margin: 0; padding: 0}
+body{line-height:1.5; word-break: break-all}
+a,img{-webkit-touch-callout:none; border: none; outline: none}
+a{color:rgb(39,37,59); text-decoration: none}
+body,button,input,select,textarea{font-size:.14rem; color:rgb(39,37,59); font-family:Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif}
+
+/* 弹性布局 */
+.j-flex{display: flex; display: -webkit-flex; display: -webkit-box;}
+.j-flex-vtc{-webkit-box-orient: vertical; -webkit-flex-flow: column}
+.j-flex .flex .fc{position: absolute}
+.j-flex .flex{flex: 1; -webkit-flex:1; -webkit-box-flex:1; position: relative}
+.j-flex .flex-2{flex: 2; -webkit-flex:2; -webkit-box-flex:2; position: relative}
+.j-flex .flex-3{flex: 3; -webkit-flex:3; -webkit-box-flex:3; position: relative}
+.j-flex .fix{width: 1px}
+.j-flex-center{-webkit-box-align: center; -webkit-align-items: center; align-items: center}
+.j-scrollcontent{-webkit-overflow-scrolling: touch}
+
+
+/********************** 框架页布局 **********************/
+.j-leftmune-menulist a{display: block; color: #dbe1e6; margin: 0; cursor: pointer; transition: all .6s; position: relative}
+.j-leftmune-menulist a .fa{margin-right: .08rem}
+.j-leftmune-menulist-a,.j-leftmune-menulist-a-nosub{padding: .15rem}
+.j-leftmune-menulist-sub{display: none}
+.j-leftmune-menulist.active .j-leftmune-menulist-a,.j-leftmune-menulist.active .j-leftmune-menulist-a-nosub{color: #FFF; background: #215ca9; font: .18rem}
+.j-leftmune-menulist-sub a{padding: .1rem .1rem .1rem .3rem}
+.j-leftmune-menulist-sub a:hover,.j-leftmune-menulist-sub a.active{color: #FFF; background: linear-gradient(to bottom,rgba(255,255,255,.2) 0%,rgba(255,255,255,.1))}
+.j-leftmune-menulist.active .j-leftmune-menulist-a:before,.j-leftmune-menulist.active .j-leftmune-menulist-a-nosub:before{content: " "; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #359feb}
+
+
+
+/*************** 通用样式 *****************/
+.j-common-container-p{margin: 0; padding: .15rem}
+.j-common-container{border-radius: .05rem; background: #FFF; box-shadow: 0 .02rem .08rem rgba(0,0,0,.2); margin: 0; padding: .15rem}
+.j-common-container-np{padding: 0}
+.j-common-container-body{padding: .15rem; border-top: 1px dashed rgba(21,21,21,.1)}
+.j-common-container-title{padding: .08rem .15rem; margin: 0}
+
+
+/* 表格样式 */
+.j-table{border:0; margin: 0; padding: 0; border-spacing: 0; width: 100%}
+.j-table td{vertical-align: middle; border: none; padding: 0}
+.j-table-form{border-spacing: 0 .15rem; border-collapse: separate;}
+
+
+
+/* 按钮样式 */
+.j-btn,
+.layui-layer .layui-layer-btn a{display: inline-block; background: #FFF; margin: 0; padding: .08rem  .2rem; border-radius: .34rem; cursor: pointer; box-shadow: 0 .02rem .08rem rgba(0,0,0,.3); transition: all .6s; user-select: none}
+.j-btn.disable{opacity: .5; pointer-events: none; cursor: no-drop}
+.j-btn-group .j-btn{margin: .15rem .15rem .15rem 0;}
+.j-btn-default:hover{color: #0785fd; box-shadow: 0 .02rem .08rem rgba(7,133,253,.4);}
+.j-btn-red{color: #FFF; background: linear-gradient(to right, #ff4f81 0%,#ff606e 100%); box-shadow: 0 .02rem .08rem rgba(255,79,129,.4)}
+.j-btn-blue,
+.layui-layer .layui-layer-btn .layui-layer-btn0{color: #FFF; background: linear-gradient(to right, #0785fd 0%,#00aeff 100%); box-shadow: 0 .02rem .08rem rgba(7,133,253,.4)}
+.j-btn-deep{color: #FFF; background: linear-gradient(to right, #221e3b 0%,#3e396b 100%); box-shadow: 0 .02rem .08rem rgba(34,30,59,.4)}
+.j-btn-green{color: #FFF; background: linear-gradient(to right, #04deea 0%,#06e5c8 100%); box-shadow: 0 .02rem .08rem rgba(5,214,209,.4)}
+.j-btn-o{background: none; box-shadow: none; border:1px solid rgba(0,0,0,.3); box-sizing: border-box}
+.j-btn-o.j-btn-red{color: #ff4f81; border: 1px solid #ff4f81}
+.j-btn-o.j-btn-blue{color: #0785fd; border: 1px solid #0785fd}
+.j-btn-o.j-btn-deep{color: #221e3b; border: 1px solid #221e3b}
+.j-btn-o.j-btn-green{color: #04deea; border: 1px solid #04deea}
+.j-btn-deep:hover,
+.j-btn-red:hover,
+.j-btn-blue:hover,
+.j-btn-green:hover{opacity: .5}
+.j-btn-sm{font-size: .12rem; padding: .04rem .1rem}
+.j-btn-smx{transform: scale(.8); transform-origin: 50% 0;}
+.j-btn-lg{font-size: .16rem; padding: .09rem .25rem}
+.j-btn-group .j-btn.j-btn-full,
+.j-btn.j-btn-full{display: block; margin: 0 auto; text-align: center}

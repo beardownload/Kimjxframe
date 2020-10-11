@@ -1,0 +1,41 @@
+<!-- vue 菜单组件 -->
+<script type="text/html">
+  <div>
+    <div style="float: left; width: 2rem; text-align: center; border-right: 1px solid #EFEFEF">
+      <div style="height: .05rem"></div>
+      <img :src="G.KimConfig.RootPath + 'static/img/logo.png'" style="max-height: .5rem; max-width: 1.4rem; user-select: none; display:block; margin: 0 auto">
+      <div style="height: .05rem"></div>
+    </div>
+
+    <div style="float: left; margin-left: .15rem; line-height: .6rem;">
+      <span v-for="(item, index) in nav">
+        <span v-if="index > 0" style="display: inline-block; padding: 0 .05rem">/</span><span v-if="index == 0" style="font-size: .16rem; display: inline-block;">{{ item }}</span>
+
+        <span v-else style="color:#888; display: inline-block;">{{ item }}</span>
+      </span>
+    </div>
+  </div>
+</script>
+
+
+<script>
+  Vue.component(__COMPONENT__, {
+    props:['G',"nav"],
+
+    data:function(){
+      return {
+        count:1,
+      };
+    },
+
+    template:__TEMPLATE__,
+
+    mounted:function(){
+
+    },
+
+    methods:{
+
+    },
+  });
+</script>

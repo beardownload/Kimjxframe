@@ -1,0 +1,167 @@
+<!-- vue 菜单组件 -->
+<script type="text/html">
+  <div>
+
+    <div v-for="item in menus" class="j-leftmune-menulist j-leftmune-N" :data-id="item.id">
+
+      <a v-if="item.child.length <= 0" class="j-leftmune-menulist-a-nosub" :href="item.url">
+        <span :class="item.icon"></span> {{ item.name }}
+      </a>
+
+      <div v-else>
+
+        <a class="j-leftmune-menulist-a">
+          <span :class="item.icon"></span> {{ item.name }}
+        </a>
+
+        <div class="j-leftmune-menulist-sub">
+          <a v-for="subitem in item.child" :href="subitem.url" :data-id="subitem.id">{{ subitem.name }}</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</script>
+
+
+<script>
+  Vue.component(__COMPONENT__, {
+    props:['G',"menus"],
+
+    data:function(){
+      return {
+        //主菜单
+        activeMenu:1,
+
+        //子菜单
+        activeSubMenu:0,
+      };
+    },
+
+    template:__TEMPLATE__,
+
+    methods:{
+
+    },
+
+    mounted:function(){
+      var menus = this.menus;
+
+      var $MenusContainer = $("#menu");
+
+      var $menusDom       = $MenusContainer.find("a");
+
+
+      //修改导航位置信息
+      var setNav = function(menu,submenu){
+        var nav = [];
+        if(menu){
+          nav.push(menu.name);
+        }
+
+        if(submenu){
+          nav.push(submenu.name);
+        }
+
+        Kim.vue_page.nav = nav;
+      }
+
+
+      var hashchangeID = KJ.Fnregistevent("hashchange",function(data){
+        var hash = location.hash;
+
+        var nowpage     = hash == "#" || hash == "" ? '#' + Kim.nowPagePath : hash;
+
+        //菜单初始化
+        var menu    = false;
+        var submenu = false;
+
+        $menusDom.removeClass('active');
+
+        for(var i=0;i<menus.length;i++){
+          if(nowpage == menus[i].url){
+            menu = menus[i];
+
+            if(!menu.child || menu.child.length <= 0){
+              break;
+            }
+          }
+
+          //遍历子菜单
+          if(menus[i].child && menus[i].child.length > 0){
+            var submenus = menus[i].child;
+
+            for(var j=0;j<submenus.length;j++){
+              if(nowpage == submenus[j].url){
+                submenu = submenus[j];
+                menu    = menus[i]
+                break;
+              }
+            }
+          }
+        }
+
+        //全匹 失败 进行 path路径匹配
+        if(!menu && !submenu){
+          var path = nowpage.split("?")[0];
+          
+          for(var i=0;i<menus.length;i++){
+            if(path == menus[i].url){
+              menu = menus[i];
+
+              if(!menu.child || menu.child.length <= 0){
+                break;
+              }
+            }
+
+            //遍历子菜单
+            if(menus[i].child && menus[i].child.length > 0){
+              var submenus = menus[i].child;
+
+              for(var j=0;j<submenus.length;j++){
+                if(path == submenus[j].url){
+                  submenu = submenus[j];
+                  menu    = menus[i]
+                  break;
+                }
+              }
+            }
+          }
+        }
+
+        //console.log([menu,submenu]);
+
+        if(menu || submenu){
+          $MenusContainer.find(".j-leftmune-N[data-id='"+ menu.id +"']").addClass("active").find(".j-leftmune-menulist-sub").show().find("a[data-id='"+ submenu.id +"']").addClass("active");
+
+          setNav(menu,submenu);
+        }
+      });
+
+
+      $MenusContainer.find(".j-leftmune-menulist-a").on("click",function(){
+        var aim = $(this).parent();
+        
+        if(aim.is(".active")){
+          aim.find(".j-leftmune-menulist-sub").slideUp();
+          aim.removeClass("active");
+        }else{
+          aim.find(".j-leftmune-menulist-sub").slideDown();
+          aim.addClass("active");
+        }
+      });
+
+      /*$MenusContainer.find(".j-leftmune-menulist-sub a").on("click",function(){
+        $MenusContainer.find(".j-leftmune-menulist-sub a").removeClass("active");
+        $MenusContainer.find(".j-leftmune-menulist-a-nosub").parent().removeClass("active");
+        $(this).addClass("active");
+      });
+
+      $MenusContainer.find(".j-leftmune-menulist-a-nosub").on("click",function(){
+        $MenusContainer.find(".j-leftmune-menulist-a-nosub").parent().removeClass("active");
+        $MenusContainer.find(".j-leftmune-menulist-sub a").removeClass("active");
+        $(this).parent().addClass("active");
+      });*/
+    }
+  });
+</script>
