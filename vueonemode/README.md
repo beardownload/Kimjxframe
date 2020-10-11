@@ -41,7 +41,7 @@ https://www.upupw.net/
  ·pages 页面目录<br>
 
  ··main 页面框架主入口文件夹，可通过修改配置更换<br>
- ··main.html 和谐入口页面框架，路由切换组件body在这里面，菜单组件引入头部组件引入<br>
+ ··main.html 入口页面框架，路由切换组件body在这里面，菜单组件引入头部组件引入<br>
  ···index.html 默认首页<br>
  ···menu 菜单组件文件夹<br>
  ····list.html 菜单组件<br>
@@ -85,7 +85,7 @@ Kimjxframe.js 框架<br>
 
 
 <br>
-/* 组件 OR 页面属性规范 */
+<h2>组件 OR 页面属性规范</h2><br>
 样式     style标签 样式内容，自行做好样式前缀分割，以免互相影响重置。<br>
 模版页面 script type="text/html"<br>
 组件js   script
@@ -101,23 +101,23 @@ Kimjxframe.js 框架<br>
 
   组件标签带上 K-VUE-COMPONENT属性即可 自动加载
   <script type="text/html">
-    <div>
+    %3Cdiv%3E
       
 
-      <div class="j-common-container-p">
+      %3Cdiv class="j-common-container-p"%3E
         这里自动引入了 pages/main/header/index.html组件
-        <main-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"></main-header-index>
+        %3Cmain-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"%3E%3C/main-header-index%3E
 
         第二次引入 可重复引入，不要在 组件又嵌套自身 或者 互相嵌套造成死循环
-        <main-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"></main-header-index>
+        %3Cmain-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"%3E%3C/main-header-index%3E
 
-        <a href="#" class="test-class">返回默认页</a>
+        %3Ca href="#" class="test-class"%3E返回默认页%3C/a%3E
 
-        <div class="j-common-container">
+        %3Cdiv class="j-common-container"%3E
         
-        </div>
-      </div>
-    </div>
+        %3C/div%3E
+      %3C/div%3E
+    %3C/div%3E
   </script>
 
 
