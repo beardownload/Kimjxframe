@@ -101,23 +101,23 @@ Kimjxframe.js 框架<br>
 
   组件标签带上 K-VUE-COMPONENT属性即可 自动加载
   <script type="text/html">
-    %3Cdiv%3E
+    &ltp;div&gt;
       
 
-      %3Cdiv class="j-common-container-p"%3E
+      &ltp;div class="j-common-container-p"&gt;
         这里自动引入了 pages/main/header/index.html组件
-        %3Cmain-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"%3E%3C/main-header-index%3E
+        &ltp;main-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"&gt;&ltp;/main-header-index&gt;
 
         第二次引入 可重复引入，不要在 组件又嵌套自身 或者 互相嵌套造成死循环
-        %3Cmain-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"%3E%3C/main-header-index%3E
+        &ltp;main-header-index K-VUE-COMPONENT v-bind:G="G" v-bind:nav="nav"&gt;&ltp;/main-header-index&gt;
 
-        %3Ca href="#" class="test-class"%3E返回默认页%3C/a%3E
+        &ltp;a href="#" class="test-class"&gt;返回默认页&ltp;/a&gt;
 
-        %3Cdiv class="j-common-container"%3E
+        &ltp;div class="j-common-container"&gt;
         
-        %3C/div%3E
-      %3C/div%3E
-    %3C/div%3E
+        &ltp;/div&gt;
+      &ltp;/div&gt;
+    &ltp;/div&gt;
   </script>
 
 
