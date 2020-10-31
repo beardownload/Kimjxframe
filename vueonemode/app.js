@@ -212,12 +212,15 @@
       if(typeof(dom) == typeof("x")){
         VUE_AUTOLOADDOM.innerHTML = dom;
         domlist = VUE_AUTOLOADDOM.querySelectorAll("*[K-VUE-COMPONENT]");
+
+        //组件中存在 template 标签处理
+        var templateComponent = Kim.VUE_templateComponent(VUE_AUTOLOADDOM.querySelectorAll('template'));
       }else{
         domlist = dom.querySelectorAll("*[K-VUE-COMPONENT]");
-      }
 
-      //组件中存在 template 标签处理
-      var templateComponent = Kim.VUE_templateComponent(VUE_AUTOLOADDOM.querySelectorAll('template'));
+        //组件中存在 template 标签处理
+        var templateComponent = Kim.VUE_templateComponent(dom.querySelectorAll('template'));
+      }
 
 
       if(Kim.DEBUG){
@@ -265,6 +268,17 @@
         for(var j=0;j<domlist.length;j++){
           list.push( domlist[j].localName.replace(/-/g,"/") );
         }
+
+        var subList = VUE_AUTOLOADDOM.querySelectorAll('template');
+
+        if(subList.length > 0){
+          var subChild = Kim.VUE_templateComponent(subList);
+
+          for(var j=0;j<subChild.length;j++){
+            list.push( subChild[j] );
+          }
+        }
+        
       }
 
       VUE_AUTOLOADDOM.innerHTML = '';
