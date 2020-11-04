@@ -236,7 +236,7 @@
       
 
       //无组件
-      if(domlist.length <= 0){
+      if(domlist.length <= 0 && list.length <= 0){
         if(callback){ callback(); }
 
         clear();
