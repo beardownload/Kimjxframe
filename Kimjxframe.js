@@ -33,6 +33,9 @@
 
       //js 缓存版本控制 修改该属性即可控制版本缓存
       cachevesion:"",
+
+      //版本控制键值
+      cachevesionkey:"kv",
     },
 
     //事件
@@ -182,9 +185,9 @@
         url = _this.CONFIG.root + _this.CONFIG.pageroot + _this.CONFIG.TemplatemodeAPI + "?page=" + u + "&runmode=html";
       }else{
         if(u.split("?").length > 1){
-          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.cachevesion ? "&v=" + KJ.cachevesion : "");
+          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.cachevesion ? "&"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
         }else{
-          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.cachevesion ? "?v=" + KJ.cachevesion : "");
+          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.cachevesion ? "?"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
         }
         
       }
@@ -292,9 +295,9 @@
       }
 
       if(u.split("?").length > 1){
-        script.src = u + (KJ.cachevesion ? "&v=" + KJ.cachevesion : "");
+        script.src = u + (KJ.cachevesion ? "&"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
       }else{
-        script.src = u + (KJ.cachevesion ? "?v=" + KJ.cachevesion : "");
+        script.src = u + (KJ.cachevesion ? "?"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
       }
       
 
@@ -333,7 +336,7 @@
         console.error([u,"加载失败！"]);
       }
 
-      link.href = u + (KJ.cachevesion ? "?v=" + KJ.cachevesion : "");
+      link.href = u + (KJ.cachevesion ? "?"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
 
       document.head.appendChild(link);
     },
