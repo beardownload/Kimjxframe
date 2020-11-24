@@ -1,0 +1,68 @@
+<style>
+  {{# var cssConfig = G.cssConfig; }}
+</style>
+
+
+<script type="text/html">
+  <div>
+     <form-pagecontainer K-VUE-COMPONENT>
+      <template v-slot:head>
+        <form-head :showbackbtn="false" K-VUE-COMPONENT>
+          
+          <template v-slot:headname>头部插槽引头部组件</template>
+
+        </form-head>
+      </template>
+
+
+      <!-- 内容 -->
+      <template v-slot:content>
+
+        <div style="height: .1rem"></div>
+
+        <div class="j-m">
+          <div class="j-mm">
+            <a class="j-btn j-btn-full" onclick="Aloader(this)" data-url="test/test?id=123">打开新页面并通过url 传参 id = 123</a>
+          </div>
+        </div>
+        
+
+      </template>
+    </form-pagecontainer>
+  </div>
+</script>
+
+
+<script>
+  //首页底部菜单
+  Vue.component(__COMPONENT__, {
+    props:["appid"],
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        url:"",
+
+        Gdata:RootApp.F_getVueDefaultData(),
+      };
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      var app = App[this.appid];
+
+
+    },
+
+    methods:{
+      //测试方法
+      F_test:function(){
+        alert(11111);
+      },
+    },
+  });
+</script>

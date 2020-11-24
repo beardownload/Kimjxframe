@@ -1,0 +1,48 @@
+<style>
+  .form-listresultok-okimg{
+    background:url({{ Kim.RootPath }}static/img/ok.png) no-repeat center center;
+    height: 1.2rem;
+    background-size: contain;
+  }
+</style>
+
+
+<script type="text/html">
+  <div>
+    
+    <div class="form-listresultok-okimg"></div>
+
+    <div style="height: .3rem"></div>
+
+    <div style="text-align: center; font-size: .2rem; font-weight: bold;"><slot></slot></div>
+
+  </div>
+</script>
+
+
+<script>
+  //全局列表内容为空时的统一组件
+  Vue.component(__COMPONENT__, {
+    props:[],
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        
+      };
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      
+    },
+
+    methods:{
+
+    }
+  });
+</script>

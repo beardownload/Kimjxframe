@@ -1,0 +1,52 @@
+<script>
+  (function(){
+    /*
+      在此处 接入登录检测 加载登录页面等
+      默认加载 "index/index" 组件作为页面
+    */
+    var defaultUrl  = "index/index";
+
+    var appid = 1;
+
+    var seesionList = sessionStorage[Kim.sessionName] ? JSON.parse(sessionStorage[Kim.sessionName]) : [];
+
+    var appChecker = function(){
+
+      if(App[appid]){
+        var app = App[appid];
+
+        if(Kim.INITPAGEGET.start){
+
+          if(app.url != Kim.INITPAGEGET.start){
+            App[appid].url = Kim.INITPAGEGET.start;
+          }
+          
+        }else if(App[appid].url != defaultUrl){
+
+          App[appid].url = defaultUrl;
+
+        }
+
+      }else{
+        setTimeout(appChecker,2000);
+      }
+    }
+
+    if(seesionList.length > 0){
+      appChecker();
+    }else{
+      //初始化页面
+      Kim.FnLoad({
+        hashchangeOff:true,
+        url: Kim.INITPAGEGET.start ? Kim.INITPAGEGET.start : defaultUrl,
+        animateIn:false,
+        loadNow:true
+      },function(_app){
+
+        _app.OFF("GCALLBACK","default");
+
+      });
+    }
+    
+  })();
+</script>

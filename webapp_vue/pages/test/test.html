@@ -1,0 +1,74 @@
+<style>
+  {{# var cssConfig = G.cssConfig; }}
+
+  .test-test-font{
+    font-size:.8rem;
+    color:{{ cssConfig.blue1 }};
+  }
+</style>
+
+
+<script type="text/html">
+  <div>
+     <form-pagecontainer K-VUE-COMPONENT>
+      <template v-slot:head>
+        <form-head K-VUE-COMPONENT>
+          
+          <template v-slot:headname>头部插槽引头部组件</template>
+
+        </form-head>
+      </template>
+
+
+      <!-- 内容 -->
+      <template v-slot:content>
+
+        <div style="height: .1rem"></div>
+
+        <a class="test-test-font" onclick="RootApp.">打开新页面</a>
+
+        参数接收id：{{ id }}
+
+      </template>
+    </form-pagecontainer>
+  </div>
+</script>
+
+
+<script>
+  //首页底部菜单
+  Vue.component(__COMPONENT__, {
+    props:["appid"],
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        Gdata:RootApp.F_getVueDefaultData(),
+
+        //参数接收
+        id:"",
+      };
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      var app = App[this.appid];
+
+      //进行 url参数接收
+      console.log(app.GET);
+
+      this.id = app.GET.id;
+    },
+
+    methods:{
+      //测试方法
+      F_test:function(){
+        alert(11111);
+      },
+    },
+  });
+</script>

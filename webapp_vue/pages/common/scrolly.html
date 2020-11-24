@@ -1,0 +1,81 @@
+<style>
+  .common-scrolly{overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;}
+</style>
+
+
+<script type="text/html">
+  <div>
+
+    <div @scroll="onScroll" ref="scroll" class="common-scrolly" :style="ContentStyle">
+      <slot></slot>
+    </div>
+
+  </div>
+</script>
+
+
+<script>
+  // 滚动模块
+  Vue.component(__COMPONENT__, {
+    props:{
+      width: {
+        type: String,
+        default: '100%'
+      },
+      height: {
+        type: String,
+        default: '100%'
+      }
+    },
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+      };
+    },
+
+    computed:{
+      ContentStyle:function(){
+        return 'width:' + this.width + ';' + 'height:' + this.height + ';';
+      }
+    },
+
+    methods:{
+      // 滚动事件 footer为到底 距离
+      onScroll:function(e){
+        var position = {
+          scrollHeight: e.target.scrollHeight,
+          scrollTop: e.target.scrollTop,
+          clientHeight: e.target.clientHeight,
+        }
+        
+        var footer = position.scrollHeight - (position.scrollTop + position.clientHeight)
+
+        this.$emit("scroll", {position: position, footer: footer})
+      },
+
+      // 设置滚动高度
+      scrollTo:function(x){
+        var _this = this;
+
+        var distance = Math.abs(this.$refs.scroll.scrollTop - x);
+
+        var step = (distance * 0.05) * (this.$refs.scroll.scrollTop > x ? -1 : 1);
+
+        var divide = Math.abs(parseInt( distance / step ));
+
+        var timerInterval = setInterval(function(){
+          _this.$refs.scroll.scrollTop += step;
+
+          divide--;
+
+          if(divide <= 0){
+            clearInterval(timerInterval);
+            _this.$refs.scroll.scrollTop = x;
+          }
+        }, 10);
+      }
+    },
+  });
+</script>
