@@ -32,7 +32,7 @@ Kim.VUE_useComponent 方法 可以传入组件列表，提前预加载组件<br>
 
 一个 script type="text/html" 页面内容
 
-最后是一个 js 代码 script标签
+最后是一个 js 代码 script标签  __COMPONENT__ 和 __TEMPLATE__ 为固定值，app内处理后替换为 路径组件名称和 模版代码
 <pre>
   //首页底部菜单
   Vue.component(__COMPONENT__, {
@@ -66,3 +66,12 @@ Kim.VUE_useComponent 方法 可以传入组件列表，提前预加载组件<br>
     },
   });
 </pre>
+
+
+<br><br>
+<h2>几个重要文件</h2><br>
+pages/main/main.html 框架初始化控制 此处定义全局函数 和 控制初始化，登录函数 等处理 RootApp 仅作演示，其他可自行定义<br>
+Kim.MainpageInitCallback(); 该函数 控制 app层的 框架初始化 完成必要的业务数据初始化后 初始化加载 pages/main/index.html页面<br><br>
+
+
+pages/main/index.html 该页面 控制 第一层appid 的初始化，可控制检测登录，显示登录，拦截用户展示其他页面。
