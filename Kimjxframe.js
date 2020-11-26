@@ -33,10 +33,10 @@
 
       //js 缓存版本控制 修改该属性即可控制版本缓存
       cachevesion:"",
-
-      //版本控制键值
-      cachevesionkey:"kv",
     },
+
+    //版本控制键值
+    cachevesionkey:"kv",
 
     //事件
     EVENT:{
