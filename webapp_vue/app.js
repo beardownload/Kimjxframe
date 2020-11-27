@@ -12,8 +12,8 @@
   window.getGet       = KJ.FngetGet;
 
   //debug模式 开启php页面辅助
-  KJ.CONFIG.Templatemode    = "api";
-  KJ.CONFIG.TemplatemodeAPI = "index.php";
+  //KJ.CONFIG.Templatemode    = "api";
+  //KJ.CONFIG.TemplatemodeAPI = "index.php";
   
 
   window.Kim = {
