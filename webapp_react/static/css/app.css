@@ -1,0 +1,184 @@
+@media only screen and (max-width:399px){html{font-size:95px}}
+@media only screen and (min-width:400px){html{font-size:100px}}
+@media only screen and (min-width:750px){html{font-size:110px}}
+@media only screen and (min-width:1200px){html{font-size:120px}}
+
+::-webkit-scrollbar {width: 0; height: 0}
+*,:after,:before{-webkit-tap-highlight-color:transparent}
+body,html{height:100%; margin: 0; padding: 0; overflow: hidden}
+body{-webkit-user-select:none;user-select:none; background:#f5f5f9; line-height:1.5; word-break: break-all; overflow: hidden}
+a,img{-webkit-touch-callout:none; border: none; outline: none}
+img{max-width: 100%}
+a{color: #000010; text-decoration: none}
+body,button,input,select,textarea{font-size:.14rem;color:#000010;font-family:Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;}
+
+
+/* 弹性布局 */
+.j-flex{display: flex; display: -webkit-flex; display: -webkit-box;}
+.j-flex-vtc{-webkit-box-orient: vertical; -webkit-flex-flow: column}
+.j-flex .flex .fc{position: absolute}
+.j-flex .flex{flex: 1; -webkit-flex:1; -webkit-box-flex:1; position: relative}
+.j-flex .flex-2{flex: 2; -webkit-flex:2; -webkit-box-flex:2; position: relative}
+.j-flex .flex-3{flex: 3; -webkit-flex:3; -webkit-box-flex:3; position: relative}
+.j-flex .fix{width: 1px}
+.j-flex-center{-webkit-box-align: center; -webkit-align-items: center; align-items: center}
+.j-scrollcontent{-webkit-overflow-scrolling: touch}
+
+/* 表格样式 */
+.j-table{border:0; margin: 0; padding: 0; border-spacing: 0; width: 100%}
+.j-table td{vertical-align: middle; border: none; padding: 0}
+.j-table-form{border-spacing: 0 .2rem; border-collapse: separate;}
+
+
+/* 全局加载动画 */
+.GLOBAL-loading{position: relative;border-top: 3px solid rgba(255, 255, 255, 0.2); border-right: 3px solid rgba(255, 255, 255, 0.2); border-bottom: 3px solid rgba(255, 255, 255, 0.2); border-left: 3px solid #ffffff;-webkit-animation: GLOBAL-loading-animation 1.1s infinite linear;animation: GLOBAL-loading-animation 1.1s infinite linear; border-radius: 100%; width: 18px; height: 18px; display:inline-block; box-sizing: border-box; vertical-align:middle}
+.GLOBAL-loading-green{border-top: 3px solid rgba(111, 111, 111, 0.2); border-right: 3px solid rgba(111, 111, 111, 0.2); border-bottom: 3px solid rgba(111, 111, 111, 0.2); border-left: 3px solid #34cb86;}
+.GLOBAL-loading-blue{border-top: 3px solid rgba(111, 111, 111, 0.2); border-right: 3px solid rgba(111, 111, 111, 0.2); border-bottom: 3px solid rgba(111, 111, 111, 0.2); border-left: 3px solid #1676fe;}
+@-webkit-keyframes GLOBAL-loading-animation{
+  0% {-webkit-transform: rotate(0deg);transform: rotate(0deg)}
+  100% {-webkit-transform: rotate(360deg);transform: rotate(360deg)}
+}
+@keyframes GLOBAL-loading-animation{
+  0% {-webkit-transform: rotate(0deg);transform: rotate(0deg)}
+  100% {-webkit-transform: rotate(360deg);transform: rotate(360deg)}
+}
+
+/* 通用样式 */
+.j-m{width: 100%; margin: 0 auto; padding: 0; clear: both; min-width: 3rem}
+.j-mm{margin: 0 auto; padding: 0 .1rem; box-sizing: border-box; clear: both}
+.j-clear{clear: both; margin: 0 auto; padding: 0;}
+.j-common-bgpic{background-size: contain; background-position: center; background-repeat: no-repeat}
+.j-common-txtoverflow{white-space: nowrap; overflow: hidden; text-overflow: ellipsis}
+.j-fullcontent-p{position: absolute; left: 0; right: 0; top: 0; bottom: 0}
+.j-fullcontent{width: 100%; height: 100%; position: relative;}
+.j-scrollcontent-y{overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;}
+.j-scrollcontent-x{overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;}
+.j-common-avatar{background-repeat: no-repeat; background-origin: center; background-size: cover; box-shadow: 0 .02rem .05rem rgba(0,0,0,.1);}
+.j-common-avatar-radio{border-radius: 50%}
+.j-scroll-list-line{overflow-x: auto; white-space: nowrap; margin: 0;}/* 左右滑动列表 */
+
+/* 默认两行隐藏 更多重置 line-clamp */
+.j-common-txtoverflown{text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-box-orient: vertical; -webkit-line-clamp: 2;line-clamp: 2;}
+
+/* 渐变色字 */
+.j-common-linercolortext{-webkit-text-fill-color: transparent!important; -webkit-background-clip: text!important;}
+
+
+/* 按钮样式 */
+.j-btn{display: inline-block; background: #FFF; margin: 0; padding: .1rem .2rem; border-radius: .05rem; cursor: pointer; box-shadow: 0 .02rem .08rem rgba(0,0,0,.1); user-select: none}
+.j-btn-active:active{opacity: .5}
+.j-btn-radio{border-radius: .34rem;}
+.j-btn.disable{opacity: .5; pointer-events: none; cursor: no-drop}
+.j-btn-group .j-btn{margin: .15rem .15rem .15rem 0;}
+.j-btn-default:hover{color: #1676fe; box-shadow: 0 .02rem .08rem rgba(7,133,253,.4);}
+.j-btn-red{color: #FFF; background: linear-gradient(to right, #ff2e4d 0%,#fdc558 100%); box-shadow: 0 .02rem .08rem rgba(255,46,77,.4)}
+.j-btn-white{color: #333; background: #FFF; box-shadow: none;}
+.j-btn-blue,
+.j-btn-primary{color: #FFF; background: linear-gradient(to right, #1676fe 0%,#1abbff 100%); box-shadow: 0 .02rem .08rem rgba(7,133,253,.4)}
+.j-btn-deep{color: rgb(39,37,59); background: linear-gradient(to right, #F9FAF5 0%,#E9E9E9 100%); box-shadow: 0 .02rem .08rem rgba(34,30,59,.2)}
+.j-btn-green{color: #FFF; background: linear-gradient(to right, #04deea 0%,#06e5c8 100%); box-shadow: 0 .02rem .08rem rgba(5,214,209,.4)}
+.j-btn-lightgreen{background: #EAF9F2; color: #34cb86;}
+.j-btn-yellow{color: #FFF; background: linear-gradient(to right, #ffe300 0%,rgb(255,202,0) 100%); box-shadow: 0 .02rem .08rem rgba(255,202,0,.4);}
+.j-btn-black{color: #FFF; background: rgb(39,37,59); box-shadow: 0 .02rem .08rem rgba(0,0,0,.2)}
+.j-btn-o{background: none; box-shadow: none; border:1px solid rgba(0,0,0,.3); box-sizing: border-box}
+.j-btn-o.j-btn-red{color: #ff2e4d; border: 1px solid #ff2e4d}
+.j-btn-o.j-btn-blue,
+.j-btn-o.j-btn-primary{color: #1676fe; border: 1px solid #1676fe}
+.j-btn-o.j-btn-deep{color: #F9FAF5; border: 1px solid #F9FAF5}
+.j-btn-o.j-btn-green{color: #34cb86; border: 1px solid #34cb86}
+.j-btn-o.j-btn-yellow{color: #FFF; border: 1px solid rgb(255,202,0)}
+.j-btn-sm{font-size: .12rem; padding: .04rem .1rem}
+.j-btn-smx{transform: scale(.8); transform-origin: 50% 50%;}
+.j-btn-lg{font-size: .16rem; padding: .15rem .3rem}
+.j-btn-group .j-btn.j-btn-full,
+.j-btn-full{display: block; margin: 0 auto; text-align: center}
+
+
+/* label小标签 */
+.j-label input{display: none}
+.j-label{line-height: 1; font-size: .12rem; padding: .04rem .06rem; display: inline-block; color: #FFF; border-radius: .06rem;}
+.j-label-group .j-label{margin-right: .1rem; margin-bottom: .1rem;}
+.j-label-radio{border-radius: .17rem}
+.j-label-red,
+.j-label-select input:checked~.j-label-select-red{background: linear-gradient(to right, #ff2e4d 0%,#fdc558 100%);}
+.j-label-yellow,
+.j-label-select input:checked~.j-label-select-yellow{background:linear-gradient(to right, #ffe300 0%,rgb(255,202,0) 100%); color: #FFF}
+.j-label-blue,
+.j-label-primary,
+.j-label-select input:checked~.j-label-select-blue{background:linear-gradient(to right, #2a64ff 0%,#1abbff 100%); color: #FFF}
+.j-label-green,
+.j-label-select input:checked~.j-label-select-green{background:linear-gradient(to right, #04deea 0%,#06e5c8 100%); color: #FFF}
+.j-label-deep,
+.j-label-black,
+.j-label-select input:checked~.j-label-select-deep{background:linear-gradient(to right, #9a9a9a 0%,#000000 100%); color: #FFF}
+.j-label-gray{background: #f1f4fb; color: #666}
+
+
+/* 文字颜色 */
+.j-fc-yellow{color: rgb(255,202,0)!important}
+.j-fc-green{color: #34cb86!important}
+.j-fc-primary,.j-fc-blue{color: #1676fe!important}
+.j-fc-black{color: #333!important}
+.j-fc-red{color:#ff2e4d!important}
+.j-fc-gray{color:#CCC!important}
+.j-fc-orange{color: #f48a1a!important}
+
+
+.j-loadcp-head{height: .5rem; background: linear-gradient(to right, #1676fe 0%,#1abbff 100%); margin: 0; padding: 0 .15rem; color: #FFF; font-size: .16rem}
+.j-loadcp-head-center{text-align: center; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+.j-loadcp-head-left{width: .5rem}
+.j-loadcp-head-right{width: .5rem; text-align: right;}
+
+
+/* 表单列表布局 */
+.form-head{padding: .1rem 0 0 0; margin: 0 .1rem; color: #999}
+.form-footer{padding: 0 0 .1rem 0; margin: 0 .1rem; color: #999}
+.form-head.full-p{padding: .1rem 0}
+.form-group{margin: .1rem 0; position: relative}
+.form-group.nomargin-t{margin-top: 0}
+.form-group.nomargin-b{margin-bottom: 0}
+.form-group .c{width: 100%; display: block; position: relative; background: #FFF}
+.form-group .c:last-child{box-shadow: 0 1px 1px rgba(205,205,205,.5);}
+.form-group .c.noborder{box-shadow: 0 1px 1px rgba(205,205,205,0);}
+.form-group a.c:active,.form-group .check-c.c:active{background: #EFEFEF}
+.form-group .c:after{content: " "; width: 100%; height: 1px; opacity: .5; position: absolute; background: #EFEFEF; left: 0; top: 0}
+.form-group .c:first-child:after{height: 0}
+.form-group .input{margin: 0 .1rem; padding: .12rem 0;}
+.form-group .input.no-margin{margin: 0 0; padding: 0}
+.form-group .input .right-txt{text-align: right}
+.form-group .input .center-txt{text-align: center}
+.form-group .input input,.form-group .input select{width: 100%; border: none; outline: none; background: rgba(0,0,0,0); text-align: right; -webkit-appearance: none; margin: 0; padding: .06rem 0}
+.form-group .input.normal input{text-align: left}
+.form-group .input .rtl select{direction: rtl}
+.form-group .input input[type="checkbox"],
+.form-group .input input[type="radio"]{display: none}
+.form-group .input textarea{width: 100%; border:none; outline: none; resize: none}
+.form-group .input .checkbox{margin-left: .04rem}
+.form-group .input .checkbox .icon{color: #DDD}
+.form-group .input .checkbox input:checked ~ .icon{color:#34cb86}
+.form-group .input .addons{margin-left: .08rem;}
+.form-group .input .oneline{white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.form-group .input.addon:after{content: " "; display: inline-block; margin-left: .08rem; width: .08rem; height: .08rem; border-width: .02rem .02rem 0 0; border-style: solid; border-color: #cccbcb; transform: rotate(45deg); -webkit-transform: rotate(45deg);}
+.form-group .label-msg{width: 1.2rem}
+.form-group .label-msg.sm{width: .5rem}
+.form-group .label-msg .icon{transform: translateY(.02rem); -webkit-transform: translateY(.02rem)}
+.form-group .label-msg.important:after{content: "*"; color: #ea030b}
+.form-group .img-select{position: relative; border:1px solid #DDD; width: .5rem; height: .5rem; display: block; background-repeat: no-repeat; background-size: contain; background-position: center center}
+.form-group .img-select:after{content:" "; position: absolute; width: .36rem; height: .04rem; background: #DDD; top: .23rem; left: .07rem; border-radius: .04rem}
+.form-group .img-select:before{content:" "; position: absolute; width: .04rem; height: .36rem; background: #DDD; top: .07rem; left: .23rem; border-radius: .04rem}
+.form-group .img-select:active{opacity: .5}
+.form-group .img-select input{display: none}
+.form-group .img-input{float: left; margin: .03rem .08rem .03rem 0; display: block; width: .5rem; height: .5rem; text-align: center; position: relative}
+.form-group .img-input img{max-width: 100%; max-height: 100%}
+.form-group .img-input .status{position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,.5); color: #FFF; top: 0; left: 0; line-height: .5rem}
+.form-group .img-input .delete{position: absolute; width: 100%; bottom: 0; left: 0; background: rgba(0,0,0,.5); color: #FFF; display: none}
+
+.form-group.sub-show .c{display: none}
+.form-group.show-1 .control{display: block; text-align: center}
+.form-group.show-1 .c:first-child{display: block}
+
+
+/**
+ * layui layer 弹窗按钮颜色重置
+ */
+.layui-m-layerbtn span[yes]{color: #34cb86!important}

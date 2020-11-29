@@ -1,0 +1,97 @@
+<div id="reactDom"></div>
+
+<script type="text/bable" id="testReactCode">
+  class Welcome2 extends React.Component {
+    render() {
+      return <h1>Hello</h1>;
+    }
+  }
+
+  class Welcome3 extends React.Component {
+    render() {
+      return <h1>Hello, {this.props.name}</h1>;
+    }
+  }
+</script>
+
+<script>
+  (function(){
+
+    // setTimeout(function(){
+      
+      /*var code = Babel.transform($("#testReactCode").html(),{
+        presets:["es2015","react"]
+      });
+
+      console.log(code);
+
+      var ss = document.createElement("script");
+      ss.innerHTML = code.code;
+
+      document.body.append(ss);
+
+      setTimeout(function(){
+        
+      },500);*/
+
+      
+
+    //   Kim.REACT.REACT_loader("index/index",$("#reactDom")[0],function(Component){
+    //     console.log(Component);
+    //   });
+
+    // },2000);
+    
+
+    // return false;
+
+    /*
+      在此处 接入登录检测 加载登录页面等
+      默认加载 "index/index" 组件作为页面
+    */
+    var defaultUrl  = "index/index";
+
+    var appid = 1;
+
+    var seesionList = sessionStorage[Kim.sessionName] ? JSON.parse(sessionStorage[Kim.sessionName]) : [];
+
+    var appChecker = function(){
+
+      if(App[appid]){
+        var app = App[appid];
+
+        if(Kim.INITPAGEGET.start){
+
+          if(app.url != Kim.INITPAGEGET.start){
+            App[appid].url = Kim.INITPAGEGET.start;
+          }
+          
+        }else if(App[appid].url != defaultUrl){
+
+          App[appid].url = defaultUrl;
+
+        }
+
+      }else{
+        setTimeout(appChecker,2000);
+      }
+    }
+
+    if(seesionList.length > 0){
+      appChecker();
+    }else{
+      //初始化页面
+      Kim.FnLoad({
+        hashchangeOff:true,
+        url: Kim.INITPAGEGET.start ? Kim.INITPAGEGET.start : defaultUrl,
+        animateIn:false,
+        loadNow:true
+      },function(_app){
+
+        _app.OFF("GCALLBACK","default");
+
+      });
+    }
+    
+  })();
+</script>

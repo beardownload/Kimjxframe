@@ -1,0 +1,85 @@
+<style>
+  
+</style>
+
+
+<script type="text/html">
+  <div>
+
+    <label>
+      <input type="file" name="" @change="imgFileUploadDeal($event)" style="display: none" accept="image/*">
+      <slot></slot>
+    </label>
+
+  </div>
+</script>
+
+
+<script>
+  //上传图片转base64模块
+  Vue.component(__COMPONENT__, {
+    props:[],
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+
+      };
+    },
+
+    computed:{
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      
+    },
+
+    methods:{
+      /* 选择图片 */
+      imgFileUploadDeal:function(e){
+        var _this = this;
+
+        if(e.target.files.length <= 0){
+          return false;
+        }
+
+        var aim = e.target;
+
+        var result = true;
+        
+        var filter = /png|jpg|jpeg|gif/;
+
+        var file  = aim.files[0];
+
+        if(!filter.test(file.type)){
+          J_msgshow("文件格式不符，仅可上传png|jpg|jpeg|gif格式图片");
+          return false;
+        }
+
+        if(file.size < 307200){
+          Ktool.kfilereader(file,function(data){
+            _this.$emit("upimg-url", data)
+          });
+          return false;
+        }
+
+        Ktool.kCompass({
+          width:1080,
+          height:1080,
+          fileinput:file,
+        },function(data){
+          if(data.code == 200){
+            _this.$emit("upimg-url", data.result)
+          }else{
+            J_msgshow(data.msg);
+          }
+        });
+      }
+    },
+  });
+</script>

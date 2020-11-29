@@ -1,0 +1,95 @@
+<div id="body"></div>
+
+<script>
+  /**
+   * 框架页 在此处 添加全局 业务函数
+   * 如登录 退出等
+   */
+  var RootApp = {};
+
+
+  RootApp.init = function(){
+    var _this = this;
+
+    //当前环境是支付宝还是微信
+    _this.isWx     = Ktool.userAgent.isWX();
+    _this.isAlipay = Ktool.userAgent.isAlipay();
+
+    
+    //数据缓存对象
+    _this.DataCache = {};
+
+
+    //用户信息 全局控制对象
+    _this.UserInfo = G.userinfo();
+    _this.showUserInfo = {
+      avatar:Kim.RootPath + 'static/img/default-avatar.jpg',
+      nickname:"昵称",
+      mobile:"手机号",
+    }
+
+    //初始化全局VUE 全局需要同意使用的 数据对象
+    _this.VUE_GlobalData = {
+      //完整用户信息
+      userinfo:_this.UserInfo,
+
+      //显示使用的 处理信息
+      showuserinfo:_this.showUserInfo,
+
+      //网站配置
+      webconfig:Kim.WEBCONFIG,
+    }
+
+    
+    var init = function(){
+      //解决IOS端 input键盘退出后 事件错位
+      var myEvent          = new Event('resize');
+      var resizeEevnetLock = false;
+      $(window).on("touchstart",function(e){
+        window.dispatchEvent(myEvent);
+      });
+
+      _this.F_initPage();
+    }
+
+
+    //初始化页面
+    _this.F_initPage = function(){
+       //修改站点名称
+      if(_this.isAlipay){
+        ap.setNavigationBar(Kim.WEBCONFIG.webname);
+      }else{
+        document.title = Kim.WEBCONFIG.webname;
+      }
+
+      Kim.MainpageInitCallback();
+    }
+
+
+
+    /* 获取vue 插件统一数据管理 */
+    _this.F_getVueDefaultData = function(){
+      return _this.VUE_GlobalData;
+    }
+
+
+    /**
+     * react Aloader跳板
+     */
+    _this.Aloader = function(evt){
+      Aloader(evt.target);
+    }
+
+
+    /* 关闭窗口 */
+    _this.F_closeWin = function(){
+      history.go(-1);
+    }
+
+
+    init();
+  }
+
+
+  RootApp.init();
+</script>

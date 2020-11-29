@@ -1,0 +1,129 @@
+<style>
+  
+</style>
+
+<script type="text/html">
+  <div>
+    <form-pagecontainer K-VUE-COMPONENT>
+      <!-- 头部 -->
+      <template v-slot:head>
+        <form-head K-VUE-COMPONENT>
+          <template v-slot:headname>
+            扫码分享
+          </template>
+          
+          <template v-slot:rightBtn>
+            
+          </template>
+        </form-head>
+      </template>
+
+      <!-- 内容 -->
+      <template v-slot:content>
+        
+        <div style="height: .2rem"></div>
+
+        <div style="text-align: center; margin: 0 .15rem">
+          <div ref="qrcode"></div>
+        </div>
+
+        <div style="height: .2rem"></div>
+
+        <div style="text-align: center;">
+          <a class="j-btn j-btn-blue" ref="copybtn" :data-clipboard-text="text + url">点击复制链接</a>
+        </div>
+        
+
+      </template>
+    </form-pagecontainer>
+
+  </div>
+</script>
+
+
+<script>
+  Vue.component(__COMPONENT__, {
+    props:["appid"],
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        //链接地址
+        url:"",
+
+        //链接前缀标语
+        text:"",
+
+        Gdata:RootApp.F_getVueDefaultData(),
+      };
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      var _this = this;
+
+      Kim.use([
+        [Kim.RootPath + "static/plugin/zqplugin/zepto.qrcode.min.js","js"]
+      ],function(){
+        _this.F_createQrcodeImg();
+      });
+    },
+
+    methods:{
+      //生成二维码
+      F_createQrcodeImg:function(){
+        var app = App[this.appid];
+
+        this.url = app.GET.url;
+
+        if(app.GET.text){
+          this.text = app.GET.text;
+        }
+
+        $(this.$refs.qrcode).empty().qrcode({
+          render: "image", //image,canvas,div
+          ecLevel: "H",
+          minVersion: 10,
+          fill: G.cssConfig.blue1,
+          background: "#FFF",
+          //fill: $("#Imgshow")[0],
+          text: app.GET.url,
+          size: 1080,
+          radius: 0.5,
+          quiet: 2,
+          mode: 2,//0-4 取2 或者4
+          mSize: 0.1,
+          mPosX: 0.5,
+          mPosY: 0.5,
+          label:'',
+          fontname: "Ubuntu",
+          fontcolor:'',
+          image: ''
+        });
+
+        this.F_initCopy();
+      },
+
+      //初始化 复制功能
+      F_initCopy:function(){
+        var _this = this;
+
+        Kim.use([
+          [Kim.RootPath + "static/plugin/clipboard/clipboard.min.js","js"]
+        ],function(){
+
+          var clipboard = new Clipboard(_this.$refs.copybtn);
+
+          clipboard.on('success', function(e) {
+            J_msgshow("复制成功，赶紧发送给好友吧！");
+          });
+
+        });
+      }
+    },
+  });
+</script>

@@ -1,0 +1,58 @@
+<style>
+
+</style>
+
+<script type="text/html">
+  <div>
+    <div class="j-loadcp-head j-flex j-flex-center">
+      
+      <div class="j-loadcp-head-left">
+        <span v-if="showbackbtn">
+          <span style="font-size:.18rem" onclick="RootApp.F_closeWin()" class="fas fa-chevron-left"></span>
+        </span>
+      </div>
+
+      <div class="flex j-loadcp-head-center">
+        <slot name="headname"></slot>
+      </div>
+
+      <div class="j-loadcp-head-right">
+        <slot name="rightBtn"></slot>
+      </div>
+
+    </div>
+  </div>
+</script>
+
+
+<script>
+  //全局列表内容加载到底统一显示组件
+  Vue.component(__COMPONENT__, {
+    props:{
+      showbackbtn:{
+        default:true,
+        type:Boolean
+      }
+    },
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        
+      };
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      
+    },
+
+    methods:{
+
+    }
+  });
+</script>

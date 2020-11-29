@@ -1,0 +1,108 @@
+<style>
+  
+</style>
+
+
+<script type="text/html">
+  <div>
+
+    <label style="display: inline-block;">
+      <input type="file" name="" @change="imgFileUploadDeal($event)" style="display: none" accept="image/*">
+      <div  class="img-select" :style="background"></div>
+    </label>
+
+  </div>
+</script>
+
+
+<script>
+  //上传图片转base64模块 仅在 form-group 样式下生效
+  //自动处理显示图片
+  Vue.component(__COMPONENT__, {
+    props:{
+      flag:{
+        default:-1,
+        type:Number,
+      }
+    },
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        //当前数据
+        base64data:"",
+      };
+    },
+
+    computed:{
+      background:function(){
+        return "background-image:url(" + this.base64data + ")";
+      }
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      
+    },
+
+    methods:{
+      /* 选择图片 */
+      imgFileUploadDeal:function(e){
+        var _this = this;
+
+        if(e.target.files.length <= 0){
+          return false;
+        }
+
+        var aim = e.target;
+
+        var result = true;
+        
+        var filter = /png|jpg|jpeg|gif/;
+
+        var file  = aim.files[0];
+
+        if(!filter.test(file.type)){
+          J_msgshow("文件格式不符，仅可上传png|jpg|jpeg|gif格式图片");
+          return false;
+        }
+
+        if(file.size < 307200){
+          Ktool.kfilereader(file,function(data){
+            if(_this.flag != -1){
+              _this.$emit("upimg-url", {data:data,flag:_this.flag});
+            }else{
+              _this.$emit("upimg-url", data);
+            }
+            
+
+            _this.base64data = data;
+          });
+          return false;
+        }
+
+        Ktool.kCompass({
+          width:1080,
+          height:1080,
+          fileinput:file,
+        },function(data){
+          if(data.code == 200){
+            if(_this.flag != -1){
+              _this.$emit("upimg-url", {data:data.result,flag:_this.flag});
+            }else{
+              _this.$emit("upimg-url", data.result);
+            }
+
+            _this.base64data = data.result;
+          }else{
+            J_msgshow(data.msg);
+          }
+        });
+      }
+    },
+  });
+</script>

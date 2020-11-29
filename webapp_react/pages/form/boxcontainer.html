@@ -1,0 +1,66 @@
+<style>
+
+</style>
+
+<script type="text/html">
+  <div>
+    
+    <div class="j-m">
+      <div class="j-mm">
+        <div style="border-radius: .06rem; background:#FFF">
+          <div style="padding:.15rem;" class="j-flex j-flex-center">
+            <div v-on:click="show = show ? false : true">
+              <slot name="title"></slot>
+            </div>
+
+            <div class="flex" v-on:click="show = show ? false : true" style="text-align:right">
+              <span v-show="!show" class="fas fa-angle-right"></span>
+              <span v-show="show" class="fas fa-angle-down"></span>
+            </div>
+          </div>
+
+          <div v-show="show" style="padding:0 .1rem;"><div style="height:1px; background:#efefef; opacity: .5;"></div></div>
+
+          <div v-show="show" style="padding:.1rem;">
+            <slot name="content"></slot>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</script>
+
+
+<script>
+  //容器内容分组
+  Vue.component(__COMPONENT__, {
+    props:{
+      //是否显示
+      show:{
+        type: Boolean,
+        default: false
+      }
+    },
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        
+      };
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      
+    },
+
+    methods:{
+
+    }
+  });
+</script>

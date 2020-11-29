@@ -1,0 +1,64 @@
+<style>
+  {{# var cssConfig = G.cssConfig; }}
+
+  .form-pagecontainer{
+    background: {{ cssConfig.windowbk }};
+  }
+
+  .form-pagecontainer-btn{
+    margin: 0 {{ cssConfig.listspace }};
+  }
+</style>
+
+
+<script type="text/html">
+  <div style="width:100%; height:100%;" class="j-flex j-flex-vtc form-pagecontainer">
+
+    <div>
+      <slot name="head"></slot>
+    </div>
+
+    <div class="flex">
+      <div class="j-fullcontent-p">
+        <div class="j-fullcontent j-scrollcontent-y">
+          <slot name="content"></slot>
+        </div>
+      </div>
+
+      <div style="position:absolute; left:0; right:0; bottom:.15rem">
+        <div class="form-pagecontainer-btn">
+          <slot name="fixedbtn"></slot>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</script>
+
+
+<script>
+  //全局列表内容加载到底统一显示组件 无滚动加载时 用该组件 完成页面布局
+  Vue.component(__COMPONENT__, {
+    props:[],
+
+    template:__TEMPLATE__,
+
+    data:function(){
+      return {
+        
+      };
+    },
+
+    created:function(){
+      
+    },
+
+    mounted:function(){
+      
+    },
+
+    methods:{
+
+    }
+  });
+</script>
