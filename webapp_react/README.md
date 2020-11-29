@@ -1,4 +1,4 @@
-<h2>单页面 手机端模拟App 运行模式的路由框架</h2>
+<h2>React 单页面手机端模拟App 运行模式的路由框架</h2>
 
 <h3>
   <a style="color:#0ae" href="http://yima.dev.vihost.cn/web/application/kim/webapp_react/" target="_blank">查看演示demo</a>
