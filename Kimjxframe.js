@@ -33,11 +33,12 @@
 
       //js 缓存版本控制 修改该属性即可控制版本缓存
       cachevesion:"",
+
+      //版本控制键值
+      cachevesionkey:"kv",
     },
 
-    //版本控制键值
-    cachevesionkey:"kv",
-
+    
     //事件
     EVENT:{
       hashchange:{},
@@ -72,14 +73,33 @@
         _this.CONFIG[i] = config[i];
       }
 
+      //兼容老版本
+      Object.defineProperties(KJ,{
+        cachevesionkey:{
+          get:function(){
+            return KJ.CONFIG.cachevesionkey;
+          },
+          set:function(v){
+            KJ.CONFIG.cachevesionkey = v;
+          }
+        },
+
+        cachevesion:{
+          get:function(){
+            return KJ.CONFIG.cachevesion;
+          },
+          set:function(v){
+            KJ.CONFIG.cachevesion = v;
+          }
+        },
+      });
+
       //监听hash
       window.addEventListener("hashchange", _this.Fnhashchange , false);
 
       document.body.appendChild(_this.CONFIG.appdom);
 
       _this.Fnloader(_this.CONFIG.start);
-
-      //console.log(_this);
     },
 
     //事件统一处理函数
@@ -185,9 +205,9 @@
         url = _this.CONFIG.root + _this.CONFIG.pageroot + _this.CONFIG.TemplatemodeAPI + "?page=" + u + "&runmode=html";
       }else{
         if(u.split("?").length > 1){
-          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.cachevesion ? "&"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
+          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.CONFIG.cachevesion ? "&"+ KJ.CONFIG.cachevesionkey +"=" + KJ.CONFIG.cachevesion : "");
         }else{
-          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.cachevesion ? "?"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
+          url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.CONFIG.cachevesion ? "?"+ KJ.CONFIG.cachevesionkey +"=" + KJ.CONFIG.cachevesion : "");
         }
         
       }
@@ -295,9 +315,9 @@
       }
 
       if(u.split("?").length > 1){
-        script.src = u + (KJ.cachevesion ? "&"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
+        script.src = u + (KJ.CONFIG.cachevesion ? "&"+ KJ.CONFIG.cachevesionkey +"=" + KJ.CONFIG.cachevesion : "");
       }else{
-        script.src = u + (KJ.cachevesion ? "?"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
+        script.src = u + (KJ.CONFIG.cachevesion ? "?"+ KJ.CONFIG.cachevesionkey +"=" + KJ.CONFIG.cachevesion : "");
       }
       
 
@@ -336,7 +356,7 @@
         console.error([u,"加载失败！"]);
       }
 
-      link.href = u + (KJ.cachevesion ? "?"+ KJ.cachevesionkey +"=" + KJ.cachevesion : "");
+      link.href = u + (KJ.CONFIG.cachevesion ? "?"+ KJ.CONFIG.cachevesionkey +"=" + KJ.CONFIG.cachevesion : "");
 
       document.head.appendChild(link);
     },
