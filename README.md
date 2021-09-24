@@ -112,6 +112,20 @@ Kimjxframe.js 框架<br>
         name:页面名称，hash模式自动匹配当前hash注册，注册模式取传入的name。
       </td>
     </tr>
+    <tr>
+      <td>页面html内容引入</td>
+      <td>
+        页面内 通过标签引入其他 html文件，内容直接插入<br>
+        多个页面有共有部分可超出 放一起<br>
+        <pre>
+          /* 相对路径引入 和 引入它的文件保持相对 */
+          <K-FILE file="./insertfile" />
+
+          /* 完整路径 从页面文件夹开始 */
+          <K-FILE file="test/insertfile" />
+        </pre>
+      </td>
+    </tr>
   </tbody>
 </table>
 
