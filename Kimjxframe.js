@@ -36,6 +36,9 @@
 
       //版本控制键值
       cachevesionkey:"kv",
+      
+      fileTagReg:/<(K-FILE)[^>]*>/gi,
+      fileTag:'K-FILE'
     },
 
     
@@ -148,7 +151,7 @@
         if(callback){callback()};
       });
     },
-
+    
     //加载页面 根据后缀加载页面资源
     Fnpageloader:function(u,callback){
       var pnf = u.split("."),
@@ -168,7 +171,32 @@
         _this.FngetTemplate(u,callback);
       }
     },
-
+    
+    // 批量加载页面
+    FnmultyPageLoader:function(list,callback){
+      if(list.length <= 0){
+        callback();
+        return;
+      }
+      
+      var total  = list.length;
+      var loaded = 0;
+      
+      var loader = function(){
+        KJ.Fnpageloader(list[loaded],function(){
+          loaded++;
+          
+          if(loaded >= total){
+            callback();
+          }else{
+            loader();
+          }
+        });
+      }
+      
+      loader();
+    },
+    
     //从页面目录 加载js页面资源
     FngetJsTemplate:function(u,callback){
       var _this = KJ;
@@ -181,7 +209,6 @@
       }else{
         url = _this.CONFIG.root + _this.CONFIG.pageroot + u;
       }
-         
 
       KJ.Fnloadjs(url,function(){
         if(callback){callback()};
@@ -209,7 +236,6 @@
         }else{
           url = _this.CONFIG.root + _this.CONFIG.pageroot + u + (KJ.CONFIG.cachevesion ? "?"+ KJ.CONFIG.cachevesionkey +"=" + KJ.CONFIG.cachevesion : "");
         }
-        
       }
 
       var xhr = new XMLHttpRequest();
@@ -320,7 +346,6 @@
         script.src = u + (KJ.CONFIG.cachevesion ? "?"+ KJ.CONFIG.cachevesionkey +"=" + KJ.CONFIG.cachevesion : "");
       }
       
-
       document.body.appendChild(script);
     },
 
@@ -365,6 +390,17 @@
     Fncel:function(ename){
       return document.createElement(ename);
     },
+    
+    // 后缀处理
+    FnFileExtendsDeal:function(file){
+      var pnf = file.split(".");
+      
+      if(pnf.length <= 1){
+        file = file + "." + KJ.CONFIG.runmode;
+      }
+      
+      return file;
+    },
 
     //注册页面对象 没有name则会以hash作为name创建
     Fnregistpage:function(html,callback,name){
@@ -377,10 +413,58 @@
       if(pnf.length <= 1){
         u = u + "." + KJ.CONFIG.runmode;
       }
-
-      _this.APP[u] = html;
-
-      if(callback){callback();}
+      
+      _this.FntemplateFileDeal(html,function(_html){
+        _this.APP[u] = _html;
+        if(callback){callback();}
+      },u);
+    },
+    
+    // 文件融合处理
+    FntemplateFileDeal:function(html,callback,parent){
+      var _this = KJ;
+      
+      var toolDom = KJ.Fncel('div');
+      
+      var list = html.match(KJ.CONFIG.fileTagReg);
+      var urlList = [];
+      var currentPath = '';
+      
+      if(parent){
+        var pathList = parent.split('/');
+        pathList.reverse();
+        pathList.splice(0,1);
+        pathList.reverse()
+        currentPath = pathList.join('/');
+      }
+      
+      if(list && list.length > 0){
+        toolDom.innerHTML = list.join('');
+        
+        var domList = toolDom.querySelectorAll(KJ.CONFIG.fileTag);
+        
+        for(var i=0;i<domList.length;i++){
+          var filePath = domList[i].getAttribute('file');
+          var filePathSplit = filePath.split('/');
+          
+          if(filePathSplit[0] == '.'){
+            filePathSplit[0] = currentPath;
+          }
+          
+          urlList.push(filePathSplit.join('/'));
+        }
+        
+        KJ.FnmultyPageLoader(urlList,function(){
+          for(var i=0;i<list.length;i++){
+            var url = _this.FnFileExtendsDeal(urlList[i]);
+            html = html.replace(list[i],_this.APP[url]);
+          }
+          
+          callback(html);
+        });
+      }else{
+        callback(html);
+      }
     },
 
     //URL解析参数
@@ -423,7 +507,6 @@
         _this.HASH.rawURL = location.href;
       }
       
-
       var pageparam = _this.HASH.rawURL.split("#");
 
       var page = pageparam.length > 1 ? pageparam[1].split("?")[0] : false;
