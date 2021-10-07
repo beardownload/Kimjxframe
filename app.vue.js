@@ -19,7 +19,7 @@
     VUE_COMPONENT_CSS:{},
     
     //组件样式 dom
-    VUE_COMPONENT_CSSDOM:document.createElement("div"),
+    VUE_COMPONENT_CSSDOM:document.head,
     
     //当前已加载样式数据
     VUE_COMPONENT_CSSLIST:{},
