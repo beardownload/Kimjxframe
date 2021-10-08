@@ -12,6 +12,9 @@
 
       //页面js存放地
       pageroot:"pages/",
+      
+      // 应用挂载对象
+      appObject:'Kim',
 
       //默认初始框架页 hash值
       defaultframe:"main/main",
