@@ -241,7 +241,7 @@
         APP.VUE_AutoLoadComponent(template,function(){
           //运行注册 并清理注册
           APP.$VUE_SCRIPTRUN.html(html);
-          //APP.$VUE_SCRIPTRUN.append(html);
+          // APP.$VUE_SCRIPTRUN.append(html);
           APP.$VUE_SCRIPTRUN.html('');
           
           // 加载组件CSS 到页面
