@@ -201,68 +201,116 @@
         VUE_DEALDOM.innerHTML = html;
     
         var template = VUE_DEALDOM.querySelector("script[type='text/html']").innerHTML;
+        
+        //处理样式数据
+        var scoped     = false;
+        var scopedHash = new Date().getTime();
+        var cssList = [];
+        var style = VUE_DEALDOM.querySelectorAll("style");
+
+        if(style && style.length){
+          for(var i=0;i<style.length;i++){
+            var _scoped = style[i].getAttribute('scoped') !== null;
+            
+            cssList.push({
+              css:style[i].innerHTML,
+              scoped:_scoped,
+              scopedHash:scopedHash
+            });
+            
+            // 是否启用作用域
+            if(_scoped){
+              scoped = true;
+            }
+          }
+          
+          APP.VUE_COMPONENT_CSS[component] = true;
+        }
+        
+        if(scoped){
+          // console.log('scoped',scoped)
+          template = APP.VUE_SCOPED_HTMLDEAL(template,scopedHash);
+        }
     
         html = html.replace(/__TEMPLATE__/g,"`" + template + "`");
     
-        //处理样式数据
-        var style = VUE_DEALDOM.querySelectorAll("style");
-    
-        if(style && style.length > 0){
-          var cssList = [];
-          
-          for(var i=0;i<style.length;i++){
-            cssList.push(style[i].innerHTML);
-          }
-          
-          APP.VUE_COMPONENT_CSS[component] = cssList;
-        }
-    
         VUE_DEALDOM.innerHTML = "";
         VUE_DEALDOM = null;
-    
+        
         //自动加载依赖组件
         APP.VUE_AutoLoadComponent(template,function(){
           //运行注册 并清理注册
           APP.$VUE_SCRIPTRUN.html(html);
           //APP.$VUE_SCRIPTRUN.append(html);
           APP.$VUE_SCRIPTRUN.html('');
+          
+          // 加载组件CSS 到页面
+          if(APP.VUE_COMPONENT_CSS[component] && !APP.VUE_COMPONENT_CSSLIST[component]){
+            APP.VUE_CSS_LOADER(component,cssList);
+          }
     
           if(callback){ callback(); }
-    
-          //加载组件CSS 到页面
-          if(APP.VUE_COMPONENT_CSS[component] && !APP.VUE_COMPONENT_CSSLIST[component]){
-            APP.VUE_CSS_LOADER(component);
-          }
         });
       });
     },
     
-    /* CSS 处理 */
-    VUE_CSS_LOADER:function(component){
-      var cssList = APP.VUE_COMPONENT_CSS[component];
+    // 作用域处理
+    VUE_SCOPED_PRENAME:'k-data-',
+    VUE_SCOPED_HTMLDEAL:function(html,scoped){
+      var resultCode = '';
       
+      html = html.replace(/template/g,'template-dealtag');
+      
+      var VUE_DEALDOM = document.createElement("div");
+      var $VUE_DEALDOM = $(VUE_DEALDOM);
+      
+      $VUE_DEALDOM.html(html);
+      $VUE_DEALDOM.find('*').attr(APP.VUE_SCOPED_PRENAME + scoped,'');
+      
+      resultCode = $VUE_DEALDOM.html();
+      VUE_DEALDOM.innerHTML = '';
+      VUE_DEALDOM = null;
+      
+      resultCode = resultCode.replace(/template-dealtag/g,'template');
+      // console.log(resultCode);
+      return resultCode;
+    },
+    
+    /* CSS 处理 */
+    VUE_CSS_LOADER:function(component,cssList){
+      // console.log('处理样式列表',cssList);
       for(var i=0;i<cssList.length;i++){
         var rawCode = cssList[i];
         var elStyle = document.createElement("style");
 
         if(window.layui && layui.laytpl){
-          layui.laytpl(rawCode).render({},function(cssCode){
+          layui.laytpl(rawCode.css).render({},function(cssCode){
             if(APP.LessApp){
               APP.LessApp.render(cssCode,function(_cssCode){
-                elStyle.innerHTML = _cssCode;
+                elStyle.innerHTML = APP.VUE_CSSSCOPED_DEAL(_cssCode,rawCode);
               });
             }else{
-              elStyle.innerHTML = cssCode;
+              elStyle.innerHTML = APP.VUE_CSSSCOPED_DEAL(cssCode,rawCode);
             }
           });
         }else{
-          elStyle.innerHTML = rawCode;
+          elStyle.innerHTML = APP.VUE_CSSSCOPED_DEAL(rawCode.css,rawCode);
         }
       }
 
       //设置样式已被加载
       APP.VUE_COMPONENT_CSSLIST[component] = true;
       APP.VUE_COMPONENT_CSSDOM.appendChild(elStyle);
+    },
+    
+    // css私有域处理
+    VUE_CSSSCOPED_REGEX:/(\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g,
+    VUE_CSSSCOPED_DEAL:function(cssCode,scopedItem){
+      if(scopedItem.scoped){
+        return cssCode.replace(APP.VUE_CSSSCOPED_REGEX,"$1["+ APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash +"]");
+      }
+      
+      return cssCode;
     }
   }
   
