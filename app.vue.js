@@ -199,8 +199,10 @@
 
         //组建模版赋值
         VUE_DEALDOM.innerHTML = html;
-    
-        var template = VUE_DEALDOM.querySelector("script[type='text/html']").innerHTML;
+        
+        // 同时支持两种标签模板
+        var templateDom = VUE_DEALDOM.querySelector("script[type='text/html']") || VUE_DEALDOM.querySelector("template");
+        template = templateDom.innerHTML;
         
         //处理样式数据
         var scoped     = false;
@@ -231,24 +233,52 @@
           // console.log('scoped',scoped)
           template = APP.VUE_SCOPED_HTMLDEAL(template,scopedHash);
         }
-    
+
         html = html.replace(/__TEMPLATE__/g,"`" + template + "`");
-    
-        VUE_DEALDOM.innerHTML = "";
-        VUE_DEALDOM = null;
         
         //自动加载依赖组件
         APP.VUE_AutoLoadComponent(template,function(){
-          //运行注册 并清理注册
-          APP.$VUE_SCRIPTRUN.html(html);
-          // APP.$VUE_SCRIPTRUN.append(html);
-          APP.$VUE_SCRIPTRUN.html('');
-          
+          // babael 是否引入了 进行es6支持
+          if(APP.BabelApp){
+            VUE_DEALDOM.innerHTML = html;
+            
+            var scriptDomList = VUE_DEALDOM.querySelectorAll('script');
+            var scriptDom;
+            if(scriptDomList && scriptDomList.length >1){
+              for(var i=0;i<scriptDomList.length;i++){
+                var type = scriptDomList[i].getAttribute('type');
+                
+                if(type === 'text/javascript' || type === null){
+                  scriptDom = scriptDomList[i];
+                  break;
+                }
+              }
+            }else{
+              scriptDom = scriptDomList[0];
+            }
+            
+            scriptDom.innerHTML = APP.BabelApp.render(scriptDom.innerHTML,function(_code){
+              scriptDom.innerHTML = '(function(){'+ _code +'})()';
+              
+              //运行注册 并清理注册
+              // APP.$VUE_SCRIPTRUN.html(VUE_DEALDOM.innerHTML);
+              APP.$VUE_SCRIPTRUN.append(VUE_DEALDOM.innerHTML);
+              // APP.$VUE_SCRIPTRUN.html('');
+            });
+          }else{
+            //运行注册 并清理注册
+            // APP.$VUE_SCRIPTRUN.html(html);
+            APP.$VUE_SCRIPTRUN.append(html);
+            // APP.$VUE_SCRIPTRUN.html('');
+          }
+
           // 加载组件CSS 到页面
           if(APP.VUE_COMPONENT_CSS[component] && !APP.VUE_COMPONENT_CSSLIST[component]){
             APP.VUE_CSS_LOADER(component,cssList);
           }
-    
+          
+          VUE_DEALDOM.innerHTML = "";
+          VUE_DEALDOM = null;
           if(callback){ callback(); }
         });
       });
