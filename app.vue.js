@@ -333,11 +333,27 @@
       APP.VUE_COMPONENT_CSSDOM.appendChild(elStyle);
     },
     
+    // deep深度处理
+    VUE_CSSSCOPED_DEEPREG:/::v-deep (\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g,
+    VUE_CSSSCOPED_DEEP(cssCode,scopedTag){
+      var matchList = cssCode.match(APP.VUE_CSSSCOPED_DEEPREG);
+      
+      if(matchList && matchList.length > 0){
+        for(var i=0;i<matchList.length;i++){
+          cssCode = cssCode.replace(matchList[i] + scopedTag,matchList[i].replace('::v-deep ',''));
+        }
+      }
+      
+      return cssCode;
+    },
+    
     // css私有域处理
     VUE_CSSSCOPED_REGEX:/(\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g,
     VUE_CSSSCOPED_DEAL:function(cssCode,scopedItem){
       if(scopedItem.scoped){
-        return cssCode.replace(APP.VUE_CSSSCOPED_REGEX,"$1["+ APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash +"]");
+        var scopedTag = '[' + APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash + ']';
+        var scopedCss = cssCode.replace(APP.VUE_CSSSCOPED_REGEX,"$1" + scopedTag);
+        return APP.VUE_CSSSCOPED_DEEP(scopedCss,scopedTag);
       }
       
       return cssCode;
