@@ -10,7 +10,7 @@
     BabelApp:false,
     
     // less处理配置
-    RenderConfig:{ presets: ['stage-0','es2015','es2016','es2017','es2015-loose','es2015-no-commonjs'] },
+    RenderConfig:{ presets: ['stage-0','es2015','es2016','es2017','es2015-loose','es2015-no-commonjs','react'] },
     
     initCheck:function(callback){
       if(window.Babel){

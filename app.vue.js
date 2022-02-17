@@ -309,10 +309,10 @@
     /* CSS 处理 */
     VUE_CSS_LOADER:function(component,cssList){
       // console.log('处理样式列表',cssList);
-      for(var i=0;i<cssList.length;i++){
+      var deal = function(i){
         var rawCode = cssList[i];
         var elStyle = document.createElement("style");
-
+        
         if(window.layui && layui.laytpl){
           layui.laytpl(rawCode.css).render({},function(cssCode){
             if(APP.LessApp){
@@ -326,16 +326,21 @@
         }else{
           elStyle.innerHTML = APP.VUE_CSSSCOPED_DEAL(rawCode.css,rawCode);
         }
+        
+        APP.VUE_COMPONENT_CSSDOM.appendChild(elStyle);
+      }
+      for(var i=0;i<cssList.length;i++){
+        deal(i)
       }
 
       //设置样式已被加载
       APP.VUE_COMPONENT_CSSLIST[component] = true;
-      APP.VUE_COMPONENT_CSSDOM.appendChild(elStyle);
     },
     
     // deep深度处理
     VUE_CSSSCOPED_DEEPREG:/::v-deep (\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g,
     VUE_CSSSCOPED_DEEP(cssCode,scopedTag){
+      console.log(cssCode)
       var matchList = cssCode.match(APP.VUE_CSSSCOPED_DEEPREG);
       
       if(matchList && matchList.length > 0){
@@ -348,10 +353,10 @@
     },
     
     // css私有域处理
-    VUE_CSSSCOPED_REGEX:/(\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g,
+    VUE_CSSSCOPED_REGEX:/(\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)?[\s]{/g,
     VUE_CSSSCOPED_DEAL:function(cssCode,scopedItem){
       if(scopedItem.scoped){
-        var scopedTag = '[' + APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash + ']';
+        var scopedTag = '[' + APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash + '] {';
         var scopedCss = cssCode.replace(APP.VUE_CSSSCOPED_REGEX,"$1" + scopedTag);
         return APP.VUE_CSSSCOPED_DEEP(scopedCss,scopedTag);
       }
