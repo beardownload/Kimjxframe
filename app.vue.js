@@ -353,9 +353,8 @@
     },
     
     // css私有域处理
-    VUE_CSSSCOPED_REGEX:/([\.|#]-?[_a-zA-Z]+[_a-zA-Z0-9-]*)(?![_a-zA-Z0-9-])/g,
+    VUE_CSSSCOPED_REGEX:/(\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)(?![_a-zA-Z0-9-])/g,
     VUE_CSSSCOPED_DEAL:function(cssCode,scopedItem){
-      console.log(cssCode)
       if(scopedItem.scoped){
         var scopedTag = '[' + APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash + ']';
         var scopedCss = cssCode.replace(APP.VUE_CSSSCOPED_REGEX,"$1" + scopedTag);

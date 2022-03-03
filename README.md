@@ -137,8 +137,8 @@ Kimjxframe.js 框架<br>
 
 <br><br><br>
 <h3>扩展组件使用</h3><br>
-<h3>app.vue.js 支持vue2版本<h3><br><br>
-只支持 class .xx #,.符号开头的样式区域话处理<br>
+<h3>app.vue.js 支持vue2版本</h3><br><br>
+只支持 class .xx .符号开头的样式区域话处理<br>
 div标签 等不会被编译处理<br>
 <pre>
 ::v-deep{
