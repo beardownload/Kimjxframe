@@ -339,8 +339,7 @@
     
     // deep深度处理
     VUE_CSSSCOPED_DEEPREG:/::v-deep (\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g,
-    VUE_CSSSCOPED_DEEP(cssCode,scopedTag){
-      console.log(cssCode)
+    VUE_CSSSCOPED_DEEP:function(cssCode,scopedTag){
       var matchList = cssCode.match(APP.VUE_CSSSCOPED_DEEPREG);
       
       if(matchList && matchList.length > 0){
