@@ -136,20 +136,24 @@ Kimjxframe.js 框架<br>
 </table>
 
 <br><br><br>
-<h3>扩展组件使用</h3><br><br>
-<h4>app.vue.js 支持vue2版本<h4><br>
-只支持 class .xx .符号开头的样式区域话处理<br>
-div #id 等不会被编译处理<br>
-::v-deep{<br>
-  此处的 class样式可以保持 不被scoped 影响<br>
-}<br>
-
+<h3>扩展组件使用</h3><br>
+<h3>app.vue.js 支持vue2版本<h3><br><br>
+只支持 class .xx #,.符号开头的样式区域话处理<br>
+div标签 等不会被编译处理<br>
+<pre>
+::v-deep{
+  /* 此处css样式将不被处理 */
+}
+<br><br>
+</pre>
 如果引入了 less 语法 则可以这样使用<br>
-.test{<br>
-  ::v-deep{<br>
-    <br>
-  }<br>
-}<br>
+<pre>
+.test{
+  ::v-deep{
+    /* 此处css样式将不被处理 */
+  }
+}
+</pre>
 .test 将被scoped影响 ::v-deep内不影响<br>
 
 
