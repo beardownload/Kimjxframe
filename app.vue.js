@@ -339,8 +339,7 @@
     
     // deep深度处理
     VUE_CSSSCOPED_DEEPREG:/::v-deep (\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g,
-    VUE_CSSSCOPED_DEEP(cssCode,scopedTag){
-      console.log(cssCode)
+    VUE_CSSSCOPED_DEEP:function(cssCode,scopedTag){
       var matchList = cssCode.match(APP.VUE_CSSSCOPED_DEEPREG);
       
       if(matchList && matchList.length > 0){
@@ -353,10 +352,10 @@
     },
     
     // css私有域处理
-    VUE_CSSSCOPED_REGEX:/(\.?-?[_a-zA-Z]+[_a-zA-Z0-9-]*){1,}[\s]?{/g,
+    VUE_CSSSCOPED_REGEX:/(\.-?[_a-zA-Z]+[_a-zA-Z0-9-]*)(?![_a-zA-Z0-9-])/g,
     VUE_CSSSCOPED_DEAL:function(cssCode,scopedItem){
       if(scopedItem.scoped){
-        var scopedTag = '[' + APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash + '] {';
+        var scopedTag = '[' + APP.VUE_SCOPED_PRENAME + scopedItem.scopedHash + ']';
         var scopedCss = cssCode.replace(APP.VUE_CSSSCOPED_REGEX,"$1" + scopedTag);
         return APP.VUE_CSSSCOPED_DEEP(scopedCss,scopedTag);
       }

@@ -135,6 +135,27 @@ Kimjxframe.js 框架<br>
   </tbody>
 </table>
 
+<br><br><br>
+<h3>扩展组件使用</h3><br>
+<h3>app.vue.js 支持vue2版本</h3><br><br>
+只支持 class .xx .符号开头的样式区域话处理<br>
+div标签 等不会被编译处理<br>
+<pre>
+::v-deep{
+  /* 此处css样式将不被处理 */
+}
+<br><br>
+</pre>
+如果引入了 less 语法 则可以这样使用<br>
+<pre>
+.test{
+  ::v-deep{
+    /* 此处css样式将不被处理 */
+  }
+}
+</pre>
+.test 将被scoped影响 ::v-deep内不影响<br>
+
 
 <br>
 /* 简单使用 推荐使用jq或者zepto食用 */
