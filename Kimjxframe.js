@@ -280,10 +280,30 @@
     },
 
 
-    //加载资源 [["地址","js/css"]]
-    Fnuse:function(list,callback){
+    //加载资源 [["地址","js/css"]] together并发
+    Fnuse:function(list,callback,together){
       var _this = KJ;
       var count = 0;
+
+      var dealTogether = function(){
+        for(var i=0;i<list.length;i++){
+          if(list[i][1] == "css"){
+            _this.Fnloadcss(list[i][0],function(){
+              count++;
+              if(count >= list.length){
+                if(callback){ callback(); }
+              }
+            });
+          }else if(list[i][1] == "js"){
+            _this.Fnloadjs(list[i][0],function(){
+              count++;
+              if(count >= list.length){
+                if(callback){ callback(); }
+              }
+            });
+          }
+        }
+      }
 
       var deal = function(){
         if(count >= list.length){
@@ -297,7 +317,11 @@
         }
       }
 
-      deal();
+      if(together){
+        dealTogether();
+      }else{
+        deal();
+      }
     },
 
     //加载js
